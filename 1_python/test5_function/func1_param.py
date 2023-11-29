@@ -1,4 +1,4 @@
-# Filename: param_def.py
+# Filename: func1_param.py
 
 from arrow import now
 
@@ -100,4 +100,52 @@ def fun9(**kwargs):
     print(kwargs['k3'])
 
 fun9(k1 = 'v11', k2 = 'v22', k3 = 'v33')
+
+
+# python的参数传递是值传递
+def fun10(**kw):
+    if 'name' in kw:
+        print(f"来源可变参数：name = {kw['name']}")
+    if 'age' in kw:
+        print(f"来源可变参数：age = {kw['age']}")
+
+kw = {'name' : 'zhangsan', 'age' : 18, 'addr' : 'hk'}
+# fun10(kw) # TypeError: fun10() takes 0 positional arguments but 1 was given
+fun10(**kw)
+
+def f1(a, b, c=0, *args, **kw):
+    print('a =', a, 'b =', b, 'c =', c, 'args =', args, 'kw =', kw)
+
+f1(1,2,3,kw='kw')
+f1(a = 1, b = 2,kw='kw')
+
+
+def mul(*args):
+    '''可接收一个或多个数并计算乘积'''
+
+    if len(args) == 0:
+        raise TypeError('缺少参数')
+    mul_ret = 1
+    for a in args:
+        mul_ret *= a
+    return mul_ret
+
+print('mul(5) =', mul(5))
+print('mul(5, 6) =', mul(5, 6))
+print('mul(5, 6, 7) =', mul(5, 6, 7))
+print('mul(5, 6, 7, 9) =', mul(5, 6, 7, 9))
+if mul(5) != 5:
+    print('测试失败!')
+elif mul(5, 6) != 30:
+    print('测试失败!')
+elif mul(5, 6, 7) != 210:
+    print('测试失败!')
+elif mul(5, 6, 7, 9) != 1890:
+    print('测试失败!')
+else:
+    try:
+        mul()
+        print('测试失败!')
+    except TypeError:
+        print('测试成功!')
 

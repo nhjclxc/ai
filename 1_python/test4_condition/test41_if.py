@@ -77,3 +77,11 @@ match_list(['c++', 'java'])
 # 使用一个分隔符来连接一个列表的所有元素成字符串
 l3 = ['c++', 'java', 'py']
 print('编程语言 '.join(l3))
+
+
+'''三元表达式
+    var = value_if_true if condition else value_if_false
+'''
+n = 5
+var = n if n < 2 else n * 2
+print(var)
