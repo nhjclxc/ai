@@ -18,6 +18,6 @@ print(f'str = {num}, type(str) = {type(num)}，id(str) = {id(num)}')
 '''
 
 # 打开文件以写入模式
-with open('output.txt', 'w') as file:
+with open('../output.txt', 'w') as file:
     print('Hello, world!', file=file)
     print('Another line', file=file)
