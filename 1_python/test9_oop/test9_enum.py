@@ -45,6 +45,7 @@ print(ColorEnum.BLUE)
 
 red = ColorEnum.RED
 print(red == ColorEnum.RED)
+print(red is ColorEnum.RED)
 print(red)
 print(ColorEnum.RED)
 print(type(red))
