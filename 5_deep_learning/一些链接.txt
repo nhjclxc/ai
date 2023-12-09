@@ -1,0 +1,11 @@
+https://web.cs.ucla.edu/~yzsun/classes/2022Winter_CS247/Slides/
+
+https://cse.msu.edu/~mayao4/dlg_book/chapters/
+
+https://rd.yyrcd.com/2021-11-23-%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CGraph%20Neural%20NetworksGNN%E7%BB%BC%E8%BF%B0.pdf
+
+https://graph-neural-networks.github.io/index.html
+
+https://luweikxy.gitbook.io/machine-learning-notes/graph-neural-networks/graph-neural-networks-review
+
+

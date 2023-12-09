@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 .idea/
 
+# 排除的目录
+5_deep_learning/d2l/d2l-zh
