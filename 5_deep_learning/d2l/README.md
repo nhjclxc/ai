@@ -21,8 +21,12 @@
    - [self](test06_matrix-calculation)
 7. 07 自动求导【动手学深度学习v2】
    - [d2l](d2l-pytorch/chapter_preliminaries/autograd.ipynb)
-   - [self](test06_matrix-calculation)
-8. 
+   - [self](test07_autograd)
+
+8. 08 线性回归 + 基础优化算法【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_linear-networks/linear-regression.ipynb)
+   - [self](test08_linear-regression)
+9. 
 8. z
 8. z
 
