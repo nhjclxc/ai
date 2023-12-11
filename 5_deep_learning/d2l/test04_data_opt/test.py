@@ -139,6 +139,17 @@ def copy():
     print(y)
     print(id(y)) # 2145061529424
 
+    # 单个张量的浅拷贝与深拷贝
+    x = torch.ones(3, 4, dtype=torch.int32)
+    print(x)
+    print(id(x)) # 1203485163280
+    z1 = x
+    print(z1)
+    print(id(z1)) # 1203485163280
+    z2 = x.clone()
+    print(z2)
+    print(id(z2)) # 1204044588480
+
     pass
 
 

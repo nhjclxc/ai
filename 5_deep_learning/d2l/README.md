@@ -13,10 +13,12 @@
 4. 04 数据操作 + 数据预处理【动手学深度学习v2】
    - [d2l](d2l-pytorch/chapter_preliminaries/ndarray.ipynb)
    - [self](test04_data_opt)
-5. 0
-   - [d2l](d2l-pytorch/chapter_preliminaries/ndarray.ipynb)
-   - [self](test04_data_opt)
+5. 05 线性代数【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_preliminaries/linear-algebra.ipynb)
+   - [self](test05_linear-algebra)
 6. 
 7. 
 8. z
+8. z
+
 
