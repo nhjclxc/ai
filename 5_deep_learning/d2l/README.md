@@ -26,8 +26,12 @@
 8. 08 线性回归 + 基础优化算法【动手学深度学习v2】
    - [d2l](d2l-pytorch/chapter_linear-networks/linear-regression.ipynb)
    - [self](test08_linear-regression)
-9. 
-8. z
+   
+9. 09 Softmax 回归 + 损失函数 + 图片分类数据集【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_linear-networks/softmax-regression.ipynb)
+   - [self](test09_softmax-regression)
+   
+10. z
 8. z
 
 
