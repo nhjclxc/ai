@@ -68,12 +68,14 @@ print(x[index])
 
 batch_size = 10
 
+# 从迭代器里面拿出一个批量用于测试
+iter= data_iter(batch_size, features, labels)
 # 生成一个数据看看
-test_x = None
-for X, y in data_iter(batch_size, features, labels):
+test_x, test_y = None,None
+for X, y in iter:
     print(X, '\n', y)
-    test_x = X[0]
-    print('yyy = ', y[0])
+    test_x = X
+    test_y = y
     break
 
 # 3. 初始化模型参数¶
@@ -88,31 +90,39 @@ b = torch.zeros(1, requires_grad=True)
 # 定义模型，将模型的输入和参数同模型的输出关联起来。]
 def linreg(X, w, b):  #@save
     """线性回归模型"""
+    # 实现 y=XW+b
     return torch.matmul(X, w) + b
 
 # 5. [定义损失函数]
 def squared_loss(y_hat, y):  #@save
     """均方损失"""
+    # 实现 (y^ - y)²/2
     return (y_hat - y.reshape(y_hat.shape)) ** 2 / 2
 
 # 6. 定义优化算法)
 def sgd(params, lr, batch_size):  #@save
     """小批量随机梯度下降"""
+    # torch.no_grad():表示下面的代码不需要计算梯度
     with torch.no_grad():
         for param in params:
+            # 更新参数
+            # 实现参数更新的公式：即学习率的梯度下降更新path：超参数/学习率.png
             param -= lr * param.grad / batch_size
+            # 超参数置0，防止参数累加
             param.grad.zero_()
 
 # 7. 定义训练超参数
-lr = 0.03
-num_epochs = 3
-net = linreg
-loss = squared_loss
+lr = 0.1  # 学习率
+num_epochs = 10  # 模型训练迭代次数
+net = linreg  # 方便后期模型的变更
+loss = squared_loss  # 方便后期损失函数的变更
 
 
 # 8. 模型训练
 for epoch in range(num_epochs):
-    for X, y in data_iter(batch_size, features, labels):
+    # 使用data_iter这个生成式来获取每一个特征与其对应的标签，即每一条输入数据和对应的输出
+    # for X, y in data_iter(batch_size, features, labels):
+    for X, y in iter:
         l = loss(net(X, w, b), y)  # X和y的小批量损失
         # 因为l形状是(batch_size,1)，而不是一个标量。l中的所有元素被加到一起，
         # 并以此计算关于[w,b]的梯度
@@ -125,8 +135,44 @@ for epoch in range(num_epochs):
 print(f'w的估计误差: {true_w - w.reshape(true_w.shape)}')
 print(f'b的估计误差: {true_b - b}')
 
-xxx = net(test_x,w,b)
-print('yyy^', net(test_x,w,b))
+
+print('\n对模型进行测试')
+for x, y in zip(test_x, test_y):
+    print('y^', net(x,w,b))
+    print('y', y)
+    print()
+
 # yyy =  tensor([2.1268])
 # yyy^ tensor([2.1225], grad_fn=<AddBackward0>)
 
+print('\n保存模型测试')
+# 保存模型参数到文件 保存权重和偏置到文件
+torch.save(w, 'weights.pth')  # PyTorch  -> pth
+torch.save(b, 'bias.pth')
+
+# 加载模型 加载权重和偏置
+loaded_w = torch.load('weights.pth')
+loaded_b = torch.load('bias.pth')
+# 使用加载的权重和偏置创建模型
+# 使用保存的参数进行模型测试
+test_xx = torch.tensor([5, 10], dtype=torch.float32)
+print(test_xx, net(test_xx, loaded_w, loaded_b))
+
+
+'''
+“true_w = torch.tensor([2, -3.4]) true_b = 4.2”
+和“w = torch.normal(0, 0.01, size=(2,1), requires_grad=True) b = torch.zeros(1, requires_grad=True)”
+的区别是什么？分别有什么作用
+
+# 通过下面的的true_w和true_b加上正太分布来模拟参数数据
+1. `true_w` 和 `true_b`：
+   - `true_w` 表示模型的真实权重，是在创建模型时预先定义好的真实参数。
+   - `true_b` 则是模型的真实偏置项。
+
+# 下面两个参数w和b就是我们要拟合的参数
+2. `w` 和 `b`：
+   - `w` 是模型的权重参数，使用正态分布随机初始化，形状为 (2, 1)。
+   - `b` 是模型的偏置项参数，初始化为 0。
+
+在模型训练中，优化算法会尝试调整 `w` 和 `b` 的值，使其逼近或接近 `true_w` 和 `true_b`，以使模型能够更好地拟合训练数据。这个过程就是训练过程中所谓的参数更新或优化，通常通过最小化损失函数来实现。
+'''
