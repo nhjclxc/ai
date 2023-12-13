@@ -1,75 +1,88 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # Author    : LuoXianchao
-# Datetime  : 2023/12/12 15:51
-# explain   : 从零实现softmax
+# Datetime  : 2023/12/12 20:31
+# Module    : test1.py
+# explain   :
 
+# %matplotlib inline
+# import torch
+# from d2l import torch as d2l
+# x = torch.arange(-8.0, 8.0, 0.1, requires_grad=True)
+# y = torch.relu(x)
+# d2l.plot(x.detach(), y.detach(), 'x', 'relu(x)', figsize=(5, 2.5))
+# d2l.plt.show()
+#
+# y.backward(torch.ones_like(x), retain_graph=True)
+# d2l.plot(x.detach(), x.grad, 'x', 'grad of relu', figsize=(5, 2.5))
+# d2l.plt.show()
 
 import torch
-from IPython import display
+from torch import nn
 from d2l import torch as d2l
+from IPython import display
+# from d2l.d2l_local import torch as d2l
+# from
+# 5_deep_learning/d2l/d2l_local/torch.py
+'''
+手写数字的识别 
+'''
 
-# 1. 数据加载
+#  1. 数据下载
 batch_size = 256
-# 使用d2l封装好的包去下载数据，并返回训练和测试数据的迭代器
 train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
 
-# 2. 初始化模型参数
-# 输入向量的特征维度
-num_inputs = 784
-# 分类器输出的分类个数
-num_outputs = 10
-
-# 产生随机模型参数，均值为0，方差为0.01，权重矩阵大小为size：每一列表示该输出标签对应该单元的权重
-W = torch.normal(0, 0.01, size=(num_inputs, num_outputs), requires_grad=True)
-# 偏置置0，
-b = torch.zeros(num_outputs, requires_grad=True)
-
-# 3. 定义softmax操作
-X = torch.tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
-print(X.sum(0, keepdim=True))
-print(X.sum(1, keepdim=True))
-
-def softmax(X):
-    ''' 实现softmax函数概率求和 ，即条件概率'''
-    X_exp = torch.exp(X)
-    partition = X_exp.sum(1, keepdim=True)
-    return X_exp / partition  # 这里应用了广播机制
-
-X = torch.normal(0, 1, (2, 5))
-X_prob = softmax(X)
-X_prob, X_prob.sum(1)
+# (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
 
 
+# 2.初始化模型参数  实现一个具有单隐藏层的多层感知机， 它包含256个隐藏单元
+# num_inputs： 输入张量的维度，即每一张图片的像素点个数（特征个数）
+# num_outputs：输出特征个数，即手写数字识别的0-9这10个数字
+# num_hiddens：隐藏层的大小   超参数
+num_inputs, num_outputs, num_hiddens = 784, 10, 256
 
-# 4. 定义模型
+# 第一层隐藏层的参数
+# W1：行数num_inputs输入特征个数，列数num_hiddens隐藏层个数，构造一个[num_inputs,num_hiddens]的权重矩阵
+W1 = nn.Parameter(torch.randn(num_inputs, num_hiddens, requires_grad=True) * 0.01)
+# b1：行数为1，列数num_hiddens就是每一个隐藏层单元对应的偏置
+b1 = nn.Parameter(torch.zeros(num_hiddens, requires_grad=True))
+
+# 第二层隐藏层的参数
+# W2：行数num_hiddens第一个隐藏层的输出特征个数作为第二个隐藏层的输入特征个数，
+#   列数num_outputs隐藏层输出个数，构造一个[num_hiddens,num_outputs]的权重矩阵
+W2 = nn.Parameter(torch.randn(num_hiddens, num_outputs, requires_grad=True) * 0.01)
+# b1：行数为1，列数num_outputs就是每一个隐藏层单元对应的偏置
+b2 = nn.Parameter(torch.zeros(num_outputs, requires_grad=True))
+
+# 整个多层感知机MLP的全部参数
+params = [W1, b1, W2, b2]
+
+# 3. 激活函数
+def relu(X):
+    # 创建一个与X相同的全0矩阵
+    a = torch.zeros_like(X)
+    # 实现x和0取最大的功能
+    return torch.max(X, a)
+
+# 4.模型
 def net(X):
-    # 实现：y = 1/(1+e^(xw+b) )，，，(xw+b)
-    return softmax(torch.matmul(X.reshape((-1, W.shape[0])), W) + b)
+    # 将输入图片的矩阵转化为一维向量
+    X = X.reshape((-1, num_inputs))
+    # 隐藏层经过权重计算后在通过内部的激活函数，得到第一层隐藏层的输出
+    H = relu(X@W1 + b1)  # 这里“@”代表矩阵乘法
+    # H = relu(torch.mm(X,W1) + b1)
+    # H为隐藏层的输出，将H作为第二层的输入特征，return返回的就是输出层得到的最终输出，只有隐藏层才需要激活函数激活
+    return (H@W2 + b2)
+    # return (torch.mm(X,W2) + b2)
 
-# 5. 定义损失函数  交叉熵采用真实标签的预测概率的负对数似然
-y = torch.tensor([0, 2])
-y_hat = torch.tensor([[0.1, 0.3, 0.6], [0.3, 0.2, 0.5]])
-# print(y_hat[[0, 1], y])  # Y_hat[0,0] 和Y_hat[1,2]
+# 5. 损失函数
+# softmax函数将(-无穷, +无穷)的输出映射到(0,1)的输出
+loss = nn.CrossEntropyLoss(reduction='none')
 
-# def cross_entropy(y_hat, y):
-#     return - torch.log(y_hat[range(len(y_hat)), y])
-def cross_entropy(y_hat, y):
-    indices = torch.tensor(range(len(y)), dtype=torch.long)
-    return -torch.log(y_hat[indices, y])
-
-print(cross_entropy(y_hat, y))
-
-# 6. 分类精度 将预测类别与真实y元素进行比较
-def accuracy(y_hat, y):  #@save
-    """计算预测正确的数量"""
-    if len(y_hat.shape) > 1 and y_hat.shape[1] > 1:
-        y_hat = y_hat.argmax(axis=1)
-    cmp = y_hat.type(y.dtype) == y
-    return float(cmp.type(y.dtype).sum())
+# 6. 训练
 
 
-print(accuracy(y_hat, y) / len(y))
+
 
 def evaluate_accuracy(net, data_iter):  #@save
     """计算在指定数据集上模型的精度"""
@@ -94,10 +107,15 @@ class Accumulator:  #@save
     def __getitem__(self, idx):
         return self.data[idx]
 
-
-# print(evaluate_accuracy(net, test_iter))
-
 # 训练
+
+def accuracy(y_hat, y):  #@save
+    """计算预测正确的数量"""
+    if len(y_hat.shape) > 1 and y_hat.shape[1] > 1:
+        y_hat = y_hat.argmax(axis=1)
+    cmp = y_hat.type(y.dtype) == y
+    return float(cmp.type(y.dtype).sum())
+
 def train_epoch_ch3(net, train_iter, loss, updater):  #@save
     """训练模型一个迭代周期（定义见第3章）"""
     # 将模型设置为训练模式
@@ -176,14 +194,6 @@ def train_ch3(net, train_iter, test_iter, loss, num_epochs, updater):  #@save
     assert train_acc <= 1 and train_acc > 0.7, train_acc
     assert test_acc <= 1 and test_acc > 0.7, test_acc
 
-lr = 0.1
-
-def updater(batch_size):
-    return d2l.sgd([W, b], lr, batch_size)
-
-num_epochs = 10
-train_ch3(net, train_iter, test_iter, cross_entropy, num_epochs, updater)
-
 def predict_ch3(net, test_iter, n=6):  #@save
     """预测标签（定义见第3章）"""
     for X, y in test_iter:
@@ -194,4 +204,17 @@ def predict_ch3(net, test_iter, n=6):  #@save
     d2l.show_images(
         X[0:n].reshape((n, 28, 28)), 1, n, titles=titles[0:n])
 
+
+# 多层感知机的训练过程与softmax回归的训练过程完全相同
+# 迭代次数，学习率
+num_epochs, lr = 10, 0.1
+updater = torch.optim.SGD(params, lr=lr)
+train_ch3(net, train_iter, test_iter, loss, num_epochs, updater)
 predict_ch3(net, test_iter)
+print('\nmlp')
+
+
+
+
+
+

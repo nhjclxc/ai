@@ -31,7 +31,15 @@
    - [d2l](d2l-pytorch/chapter_linear-networks/softmax-regression.ipynb)
    - [self](test09_softmax-regression)
    
-10. z
+10. 10 多层感知机 + 代码实现 - 动手学深度学习v2
+   - [d2l](d2l-pytorch/chapter_multilayer-perceptrons/index.ipynb)
+   - [self](test10_multilayer-perceptrons)
+     - [神经网络与机器学习(原书第3版).pdf](../神经网络与机器学习(原书第3版).pdf) [99]
+     - [神经网络与深度学习-michael中文版.pdf](../神经网络与深度学习-michael中文版.pdf) [2]
+     - [神经网络与深度学习nndl-book.pdf](../神经网络与深度学习nndl-book.pdf) [62]
+11. z
+12. 
+13. z
 8. z
 
 
