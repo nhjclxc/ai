@@ -33,7 +33,8 @@ import pandas as pd
 import requests
 from IPython import display
 import matplotlib
-matplotlib.use('TkAgg')  # 指定使用 TkAgg 后端
+# matplotlib.use('Agg')  # 静态画图  指定使用 Agg 后端
+matplotlib.use('TkAgg')  # 动态画图 指定使用 TkAgg 后端
 from matplotlib import pyplot as plt
 from matplotlib_inline import backend_inline
 
