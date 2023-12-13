@@ -32,8 +32,8 @@ def load_data_fashion_mnist(batch_size, resize=None):
         trans.insert(0, transforms.Resize(resize))
     trans = transforms.Compose(trans)
     # FashionMNIST --> MNIST
-    mnist_train = torchvision.datasets.MNIST( root="./data", train=True, transform=trans, download=True)
-    mnist_test = torchvision.datasets.MNIST( root="./data", train=False, transform=trans, download=True)
+    mnist_train = torchvision.datasets.MNIST( root="../data", train=True, transform=trans, download=True)
+    mnist_test = torchvision.datasets.MNIST( root="../data", train=False, transform=trans, download=True)
     '''
     torch.utils.data.DataLoader返回的数据结构
         返回一个迭代器，每个迭代返回的元素通常是一个包含输入特征和对应标签的元组 (inputs, labels) 
@@ -131,10 +131,11 @@ def train(epochs, lr, net, test_iter, train_iter):
         print(f'epoch {epoch}, accuracy: {evaluate(test_iter, net)}')
 
 
-def test(net, test_iter, test_size):
+def test(net, test_iter, test_size=5):
     # 获取第一个批次的数据
     first_batch = next(iter(test_iter))
     x, y = first_batch[0], first_batch[1]
+    print(x, y)
     # 随机生成len(test_iter)以内的test_size个随机数
     random_index_list = [random.randint(0, len(test_iter)) for _ in range(test_size)]
     random_inputs, random_labels = x[random_index_list], y[random_index_list]
