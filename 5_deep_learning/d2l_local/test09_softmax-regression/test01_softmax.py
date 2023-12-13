@@ -8,7 +8,7 @@
 import torch
 from IPython import display
 from d2l import torch as d2l
-
+# from d2l_local.d2l_local import torch as d2l
 # 1. 数据加载
 batch_size = 256
 # 使用d2l封装好的包去下载数据，并返回训练和测试数据的迭代器
@@ -193,5 +193,8 @@ def predict_ch3(net, test_iter, n=6):  #@save
     titles = [true +'\n' + pred for true, pred in zip(trues, preds)]
     d2l.show_images(
         X[0:n].reshape((n, 28, 28)), 1, n, titles=titles[0:n])
+    d2l.plt.show()
 
 predict_ch3(net, test_iter)
+
+print('\nsoftmax')

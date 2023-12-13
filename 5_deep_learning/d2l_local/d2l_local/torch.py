@@ -32,6 +32,8 @@ from collections import defaultdict
 import pandas as pd
 import requests
 from IPython import display
+import matplotlib
+matplotlib.use('TkAgg')  # 指定使用 TkAgg 后端
 from matplotlib import pyplot as plt
 from matplotlib_inline import backend_inline
 
@@ -185,6 +187,7 @@ def show_images(imgs, num_rows, num_cols, titles=None, scale=1.5):
     Defined in :numref:`sec_fashion_mnist`"""
     figsize = (num_cols * scale, num_rows * scale)
     _, axes = d2l.plt.subplots(num_rows, num_cols, figsize=figsize)
+    d2l.plt.show()
     axes = axes.flatten()
     for i, (ax, img) in enumerate(zip(axes, imgs)):
         if torch.is_tensor(img):
@@ -322,8 +325,12 @@ class Animator:
         for x, y, fmt in zip(self.X, self.Y, self.fmts):
             self.axes[0].plot(x, y, fmt)
         self.config_axes()
+        d2l.plt.draw()
+        d2l.plt.pause(0.001)
         display.display(self.fig)
         display.clear_output(wait=True)
+    def show(self):
+        display.display(self.fig)
 
 def train_ch3(net, train_iter, test_iter, loss, num_epochs, updater):
     """训练模型（定义见第3章）

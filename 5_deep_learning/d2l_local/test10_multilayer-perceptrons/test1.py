@@ -20,9 +20,8 @@
 import torch
 from torch import nn
 from d2l import torch as d2l
+# from d2l_local.d2l_local import torch as d2l
 from IPython import display
-# from d2l.d2l_local import torch as d2l
-# from
 # 5_deep_learning/d2l/d2l_local/torch.py
 '''
 手写数字的识别 
@@ -81,9 +80,11 @@ loss = nn.CrossEntropyLoss(reduction='none')
 
 # 6. 训练
 
+# 迭代次数，学习率
+num_epochs, lr = 10, 0.1
+updater = torch.optim.SGD(params, lr=lr)
 
-
-
+'''
 def evaluate_accuracy(net, data_iter):  #@save
     """计算在指定数据集上模型的精度"""
     if isinstance(net, torch.nn.Module):
@@ -106,8 +107,6 @@ class Accumulator:  #@save
 
     def __getitem__(self, idx):
         return self.data[idx]
-
-# 训练
 
 def accuracy(y_hat, y):  #@save
     """计算预测正确的数量"""
@@ -206,11 +205,14 @@ def predict_ch3(net, test_iter, n=6):  #@save
 
 
 # 多层感知机的训练过程与softmax回归的训练过程完全相同
-# 迭代次数，学习率
-num_epochs, lr = 10, 0.1
-updater = torch.optim.SGD(params, lr=lr)
-train_ch3(net, train_iter, test_iter, loss, num_epochs, updater)
-predict_ch3(net, test_iter)
+# train_ch3(net, train_iter, test_iter, loss, num_epochs, updater)
+# predict_ch3(net, test_iter)
+'''
+
+from d2l_local.d2l_local import torch as d2l
+d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, updater)
+d2l.predict_ch3(net, test_iter)
+
 print('\nmlp')
 
 
