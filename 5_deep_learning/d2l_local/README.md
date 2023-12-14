@@ -37,9 +37,20 @@
      - [神经网络与机器学习(原书第3版).pdf](../神经网络与机器学习(原书第3版).pdf) [99]
      - [神经网络与深度学习-michael中文版.pdf](../神经网络与深度学习-michael中文版.pdf) [2]
      - [神经网络与深度学习nndl-book.pdf](../神经网络与深度学习nndl-book.pdf) [62]
-11. z
-12. 
-13. z
-8. z
+11. 11 模型选择 + 过拟合和欠拟合【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_multilayer-perceptrons/underfit-overfit.ipynb)
+   - [self](test11_underfit-overfit)
+
+12. z
+13. 13 丢弃法【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_multilayer-perceptrons/dropout.ipynb)
+   - [self](test13_dropout)
+
+14. z
+15. 
+16. 
+17. 
+18. z
+
 
 

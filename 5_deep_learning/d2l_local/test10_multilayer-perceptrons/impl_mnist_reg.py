@@ -135,7 +135,6 @@ def test(net, test_iter, test_size=5):
     # 获取第一个批次的数据
     first_batch = next(iter(test_iter))
     x, y = first_batch[0], first_batch[1]
-    print(x, y)
     # 随机生成len(test_iter)以内的test_size个随机数
     random_index_list = [random.randint(0, len(test_iter)) for _ in range(test_size)]
     random_inputs, random_labels = x[random_index_list], y[random_index_list]
