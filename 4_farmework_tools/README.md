@@ -19,6 +19,9 @@ https://www.bilibili.com/video/BV1Q4411H7fJ
 https://www.w3schools.cn/jupyter/
 
 
-## 二、工具
+## 二、框架
     
 ### 1.PyTorch
+https://www.bilibili.com/video/BV1hE411t7RN
+http://www.feiguyunai.com/index.php/2019/09/11/pytorch-char03/
+https://github.com/xiaotudui/PyTorch-Tutorial
