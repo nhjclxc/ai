@@ -51,7 +51,13 @@
 16. 16 PyTorch 神经网络基础【动手学深度学习v2】
    - [d2l](d2l-pytorch/chapter_deep-learning-computation/model-construction.ipynb)
    - [self](test16_chap_computation)
-17. 
+17. z
+18. z
+19. 19 卷积层【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_convolutional-neural-networks/index.ipynb)
+   - [self](test19_convolutional-neural-networks)
+20. z
+21. z
 18. z
 
 
