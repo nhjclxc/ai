@@ -54,11 +54,22 @@
 17. z
 18. z
 19. 19 卷积层【动手学深度学习v2】
-   - [d2l](d2l-pytorch/chapter_convolutional-neural-networks/index.ipynb)
+   - [d2l](d2l-pytorch/chapter_convolutional-neural-networks/conv-layer.ipynb)
    - [self](test19_convolutional-neural-networks)
-20. z
-21. z
-18. z
+20. 20 卷积层里的填充和步幅【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_convolutional-neural-networks/padding-and-strides.ipynb)
+   - [self](test20_conv_padding_strides)
+21. 21 卷积层里的多输入多输出通道【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_convolutional-neural-networks/channels.ipynb)
+   - [self](test21_channels)
+22. 22 池化层【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_convolutional-neural-networks/pooling.ipynb)
+   - [self](test22_pooling)
+23. z 
+29. 29 残差网络 ResNet【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_computer-vision/fine-tuning.ipynb)
+   - [self](test22_pooling)
+37. 37 微调【动手学深度学习v2】
 
 
 
