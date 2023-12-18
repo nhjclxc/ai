@@ -73,7 +73,10 @@
 51. 51 序列模型【动手学深度学习v2】
    - [d2l](d2l-pytorch/chapter_recurrent-neural-networks/sequence.ipynb)
    - [self](test51_seq_model)
-52. z
+52. 52 文本预处理【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_recurrent-neural-networks/text-preprocessing.ipynb)
+   - [self](test52_text_preprocessing)
+53. z
 
 
 
