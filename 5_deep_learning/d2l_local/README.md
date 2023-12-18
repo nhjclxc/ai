@@ -70,6 +70,10 @@
    - [d2l](d2l-pytorch/chapter_computer-vision/fine-tuning.ipynb)
    - [self](test22_pooling)
 37. 37 微调【动手学深度学习v2】
+51. 51 序列模型【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_recurrent-neural-networks/sequence.ipynb)
+   - [self](test51_seq_model)
+52. z
 
 
 
