@@ -113,7 +113,7 @@ for i in [0, 10]:
 def load_corpus_time_machine(max_tokens=-1):  #@save
     """返回时光机器数据集的词元索引列表和词表"""
     lines = read_lines('../data/timemachine.txt')
-    tokens = tokenize(lines, 'char')
+    tokens = tokenize(lines, 'word')
     vocab = Vocab(tokens)
     # 因为时光机器数据集中的每个文本行不一定是一个句子或一个段落，
     # 所以将所有文本行展平到一个列表中

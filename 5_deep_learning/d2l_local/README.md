@@ -76,7 +76,10 @@
 52. 52 文本预处理【动手学深度学习v2】
    - [d2l](d2l-pytorch/chapter_recurrent-neural-networks/text-preprocessing.ipynb)
    - [self](test52_text_preprocessing)
-53. z
+53. 53 语言模型【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_recurrent-neural-networks/language-models-and-dataset.ipynb)
+   - [self](test53_language-models)
+54. z
 
 
 

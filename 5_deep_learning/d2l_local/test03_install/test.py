@@ -9,7 +9,7 @@ print(111)
 """
 
 安装d2l-0.17.6以下方法都有一些问题，建议直接把[https://github.com/d2l-ai/d2l-zh.git]里面的d2l文件夹里面所有文件下载到本地自己创建一个d2l模块就可以不用安装沐神提供的这个包了
-
+pip install --upgrade d2l==0.17.6
 
 
 安装d2l-0.17.6【https://blog.csdn.net/sriting/article/details/129600084】
