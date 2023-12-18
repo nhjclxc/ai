@@ -79,7 +79,10 @@
 53. 53 语言模型【动手学深度学习v2】
    - [d2l](d2l-pytorch/chapter_recurrent-neural-networks/language-models-and-dataset.ipynb)
    - [self](test53_language-models)
-54. z
+54. 54 循环神经网络 RNN【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_recurrent-neural-networks/rnn.ipynb)
+   - [self](test54_rnn)
+55. z
 
 
 
