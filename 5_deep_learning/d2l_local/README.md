@@ -82,7 +82,10 @@
 54. 54 循环神经网络 RNN【动手学深度学习v2】
    - [d2l](d2l-pytorch/chapter_recurrent-neural-networks/rnn.ipynb)
    - [self](test54_rnn)
-55. z
+56. 56 门控循环单元（GRU）【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_recurrent-modern/gru.ipynb)
+   - [self](test56_gru)
+57. z
 
 
 

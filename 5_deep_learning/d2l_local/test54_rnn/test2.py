@@ -18,6 +18,7 @@ train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
 num_hiddens = 256
 rnn_layer = nn.RNN(len(vocab), num_hiddens)
 
+# （隐藏层数，批量大小，隐藏单元数）。
 state = torch.zeros((1, batch_size, num_hiddens))
 print(state.shape)
 
@@ -43,8 +44,10 @@ class RNNModel(nn.Module):
             self.linear = nn.Linear(self.num_hiddens * 2, self.vocab_size)
 
     def forward(self, inputs, state):
+        # 独热编码
         X = F.one_hot(inputs.T.long(), self.vocab_size)
         X = X.to(torch.float32)
+        # 输入rnn得到输出Y和隐变量的状态输出
         Y, state = self.rnn(X, state)
         # 全连接层首先将Y的形状改为(时间步数*批量大小,隐藏单元数)
         # 它的输出形状是(时间步数*批量大小,词表大小)。
@@ -74,5 +77,6 @@ d2l.predict_ch8('time traveller', 10, net, vocab, device)
 
 num_epochs, lr = 500, 1
 d2l.train_ch8(net, train_iter, vocab, lr, num_epochs, device)
+d2l.predict_ch8('time traveller', 10, net, vocab, device)
 
 

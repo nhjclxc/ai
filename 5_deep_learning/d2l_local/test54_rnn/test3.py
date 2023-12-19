@@ -14,7 +14,6 @@ from d2l_local.d2l_local import torch as d2l
 
 
 
-print(F.one_hot(torch.tensor([0, 2]), 5))
-X = torch.arange(10).reshape((2, 5))
-print(F.one_hot(X.T, 28).shape)
+print(torch.tensor([0, 2]))
+print(torch.tensor([0, 2]).long())
 
