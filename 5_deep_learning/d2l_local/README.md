@@ -85,7 +85,13 @@
 56. 56 门控循环单元（GRU）【动手学深度学习v2】
    - [d2l](d2l-pytorch/chapter_recurrent-modern/gru.ipynb)
    - [self](test56_gru)
-57. z
+57. 57 长短期记忆网络（LSTM）【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_recurrent-modern/lstm.ipynb)
+   - [self](test57_lstm)
+60. 60 机器翻译数据集【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_recurrent-modern/machine-translation-and-dataset.ipynb)
+   - [self](test60_machine-translation)
+61. z
 
 
 

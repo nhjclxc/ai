@@ -79,7 +79,7 @@ class Vocab:  #@save
             词汇表初始化函数
         :param tokens: 所有词元
         :param min_freq: 最小出现的单词频率
-        :param reserved_tokens: 保留的词元，也就是一写固定的词元，比如未知<unk> unknow，开始<bos> begin of seq，结束<eos> start of seq
+        :param reserved_tokens: 保留的词元，也就是一写固定的词元，比如未知<unk> unknow，开始<bos> begin of sentence，结束<eos> start of sentence
         """
         if tokens is None:
             tokens = []
