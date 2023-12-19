@@ -13,11 +13,17 @@ from torch.nn import functional as F
 from d2l import torch as d2l
 from d2l_local.d2l_local import torch as d2l
 
+# num_steps就是序列模型的tau，也就是预测一个时往前看多少个
 batch_size, num_steps = 32, 35
 train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
 
+# F.one_hot(tensor, N)，tensor就是张量，后面的N表示总共有几种类型
+# 简言之，将每个索引映射为相互不同的单位向量： 假设词表中不同词元的数目为N（即len(vocab)）， 词元索引的范围为0到N-1。
+# 如果词元的索引是整数i， 那么我们将创建一个长度为N的全0向量， 并将第i处的元素设置为1。 此向量是原始词元的一个独热向量。
 print(F.one_hot(torch.tensor([0, 2]), len(vocab)))
+
 X = torch.arange(10).reshape((2, 5))
+# （时间步数，批量大小，词表大小）的输出
 print(F.one_hot(X.T, 28).shape)
 
 
@@ -28,16 +34,24 @@ def get_params(vocab_size, num_hiddens, device):
     num_inputs = num_outputs = vocab_size
 
     def normal(shape):
+        """ 随机初始化shape形状的权重 """
         return torch.randn(size=shape, device=device) * 0.01
 
     # 隐藏层参数
+    # W_xh 就是上一个x到当前h的权重
     W_xh = normal((num_inputs, num_hiddens))
+    # W_hh 就是上一个h到当前h的权重
     W_hh = normal((num_hiddens, num_hiddens))
+    # W_xh和W_hh两个输入对应的偏置  ，看        H = torch.tanh(torch.mm(X, W_xh) + torch.mm(H, W_hh) + b_h)
     b_h = torch.zeros(num_hiddens, device=device)
+
     # 输出层参数
+    # W_hq 输出的权重
     W_hq = normal((num_hiddens, num_outputs))
+    # b_q 输出的偏置
     b_q = torch.zeros(num_outputs, device=device)
-    # 附加梯度
+
+    # 附加梯度，表示每一层都要计算梯度
     params = [W_xh, W_hh, b_h, W_hq, b_q]
     for param in params:
         param.requires_grad_(True)
@@ -48,14 +62,18 @@ def init_rnn_state(batch_size, num_hiddens, device):
     return (torch.zeros((batch_size, num_hiddens), device=device), )
 
 def rnn(inputs, state, params):
+    """ 类似于模型的forward方法  """
     # inputs的形状：(时间步数量，批量大小，词表大小)
     W_xh, W_hh, b_h, W_hq, b_q = params
     H, = state
     outputs = []
     # X的形状：(批量大小，词表大小)
     for X in inputs:
+        # 计算输入： 上一个时间步和上一个输入X的计算，并使用tanh作为激活函数。为什么不适应Relu？？？
         H = torch.tanh(torch.mm(X, W_xh) + torch.mm(H, W_hh) + b_h)
+        # 计算输出：
         Y = torch.mm(H, W_hq) + b_q
+        # 将每一个时间步的输出Y放到一起，后面便于输出成一个序列
         outputs.append(Y)
     return torch.cat(outputs, dim=0), (H,)
 
@@ -68,7 +86,9 @@ class RNNModelScratch: #@save
         self.init_state, self.forward_fn = init_state, forward_fn
 
     def __call__(self, X, state):
+        # 对输出进行独热编码
         X = F.one_hot(X.T, self.vocab_size).type(torch.float32)
+        # 输入网络计算
         return self.forward_fn(X, state, self.params)
 
     def begin_state(self, batch_size, device):
