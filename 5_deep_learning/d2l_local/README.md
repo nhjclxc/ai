@@ -91,7 +91,10 @@
 60. 60 机器翻译数据集【动手学深度学习v2】
    - [d2l](d2l-pytorch/chapter_recurrent-modern/machine-translation-and-dataset.ipynb)
    - [self](test60_machine-translation)
-61. z
+62. 62 序列到序列学习（seq2seq）【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_recurrent-modern/seq2seq.ipynb)
+   - [self](test61_seq2seq)
+63. z
 
 
 
