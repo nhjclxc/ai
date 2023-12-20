@@ -6,6 +6,10 @@
 # explain   :
 
 '''
+https://towardsdatascience.com/foundations-of-nlp-explained-visually-beam-search-how-it-works-1586b9849a24
+
+'''
+'''
 假设预测的输出是一个1*5的张量（分别对应A,B,C,D,E），现在我要通过束搜索实现概率最高的长度为3的2个序列。输出张量由你随机生成
 
 好的，让我生成一个随机的输出张量，每个值代表 A、B、C、D、E 五个类别的概率分布，并且帮你使用束搜索（beam search）来找到概率最高的两个长度为 3 的序列。
