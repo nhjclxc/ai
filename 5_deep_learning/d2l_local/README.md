@@ -94,7 +94,14 @@
 62. 62 序列到序列学习（seq2seq）【动手学深度学习v2】
    - [d2l](d2l-pytorch/chapter_recurrent-modern/seq2seq.ipynb)
    - [self](test61_seq2seq)
-63. z
+64. 64 注意力机制【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_attention-mechanisms/index.ipynb)
+   - [self](test64_attention)
+65. z
+69. 69 BERT预训练【动手学深度学习v2】
+   - [d2l](d2l-pytorch/chapter_natural-language-processing-pretraining/index.ipynb)
+   - [self](test69_bert)
+70. z
 
 
 

@@ -67,6 +67,41 @@ def test4():
     pass
 
 
+def test5():
+    global Y
+    # X = torch.tensor([[1, 2, 3], [4, 5, 6]])
+    # print(X.size(1))
+    X = torch.tensor([1, 2, 3])
+    Y = torch.tensor([11, 22, 33])
+    # print(torch.cat((X, Y), dim=0))
+    X_Y = torch.stack((X, Y), dim=0)
+
+
+def test6():
+    x = torch.tensor([5,6])
+    y = torch.tensor([8,9])
+
+    # 通过广播操作得到结果
+    xy = x.view(-1, 1) * y
+    print(xy)
+
+    # 找出最大的两个值及其索引
+    values, indices = torch.topk(xy.flatten(), k=2)
+
+    index1 = torch.tensor([torch.div(indices[0], 2, rounding_mode='trunc'), torch.div(indices[0] - 2 + 1, 2, rounding_mode='trunc')])
+    print(index1)
+    index2 = torch.tensor([torch.div(indices[1], 2, rounding_mode='trunc'), torch.div(indices[1] - 2 + 1, 2, rounding_mode='trunc')])
+    print(index2)
+
+    print(index1[0])
+    print(index1[0]==0)
+    print(index1[0]==0)
+    print(index1[0]==0)
+
+
+    pass
+
+
 if __name__ == '__main__':
     # test1()
 
@@ -76,15 +111,9 @@ if __name__ == '__main__':
 
     # test4()
 
-    # X = torch.tensor([[1, 2, 3], [4, 5, 6]])
-    # print(X.size(1))
+    # test5()
 
-    X = torch.tensor([1, 2, 3])
-    Y = torch.tensor([11, 22, 33])
-    # print(torch.cat((X, Y), dim=0))
-    X_Y = torch.stack((X, Y), dim=0)
-    tensor([1])
-    tensor([3])
+    test6()
 
     pass
 

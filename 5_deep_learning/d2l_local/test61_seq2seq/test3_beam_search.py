@@ -143,12 +143,18 @@ for _ in range(random_output.shape[0]):
     else:
         value = random_output[i]
         top_val, top_idx1 = value.topk(1)
-        top_values[0] = top_values[0] * top_val[0]
+        temp_top_values1 = top_values[0] * top_val[0]
 
         i += 1
         value2 = random_output[i]
         top_val2, top_idx2 = value2.topk(1)
-        top_values[1] = top_values[1] * top_val2[0]
+        temp_top_values2 = top_values[1] * top_val2[0]
+
+        temp_top_values = torch.cat((temp_top_values1, temp_top_values2), dim=0)
+
+        # 通过广播操作得到结果
+        result_top_values = temp_top_values.view(-1, 1) * top_values
+
         target1 = torch.cat((target1, top_idx1), dim=0)
         target2 = torch.cat((target2, top_idx2), dim=0)
 
