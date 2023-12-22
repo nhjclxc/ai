@@ -1,0 +1,6 @@
+SPMiner: Frequent Subgraph Mining by Walking in Order Embedding Space
+    web: https://snap.stanford.edu/frequent-subgraph-mining/
+    code: https://github.com/snap-stanford/neural-subgraph-learning-GNN
+    Datasets: https://networkrepository.com/road-minnesota.php, source{The Network Data Repository with Interactive Graph Analytics and Visualization}
+Geometric Deep Learning: the Erlangen Programme of ML
+    https://iclr.cc/virtual/2021/invited-talk/3717
