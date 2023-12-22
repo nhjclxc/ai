@@ -10,42 +10,10 @@ import time
 # https://pytorch-geometric.readthedocs.io/en/latest/_modules/torch_geometric/datasets/karate.html#KarateClub
 
 import torch
-from torch import nn
-import networkx as nx
-import matplotlib
-# matplotlib.use('Agg')  # 静态画图  指定使用 Agg 后端
-import matplotlib.pyplot as plt
-
-plt.switch_backend('Agg')  # 也可以尝试其他的 backend
-from torch_geometric.utils import to_networkx
-
-import torch
 from torch.nn import Linear
 from torch_geometric.nn import GCNConv
 
-
-#
-def visualize_graph(G, color):
-    plt.figure(figsize=(7, 7))
-    plt.xticks([])
-    plt.yticks([])
-    nx.draw_networkx(G, pos=nx.spring_layout(G, seed=42), with_labels=False, node_color=color, cmap="Set2")
-    plt.show()
-
-
-def visualize_embedding(h, color, epoch=None, loss=None):
-    plt.figure(figsize=(7, 7))
-    plt.xticks([])
-    plt.yticks([])
-    h = h.detach().cpu().numpy()
-    plt.scatter(h[:, 0], h[:, 1], s=140, c=color, cmap="Set2")
-    if epoch is not None and loss is not None:
-        plt.xlabel(f'Epoch: {epoch}，Loss: {loss.item() :.4f}', fontsize=16)
-    plt.show()
-
-
-# https://pytorch-geometric.readthedocs.io/en/latest/_modules/torch_geometric/datasets/karate.html#KarateClub
-
+# 官方 https://pytorch-geometric.readthedocs.io/en/latest/_modules/torch_geometric/datasets/karate.html#KarateClub
 from torch_geometric.datasets import KarateClub
 
 # 获取数据
@@ -68,11 +36,6 @@ print(edge_index)
 # print(edge_index.t())
 
 
-# 可视化展示
-G = to_networkx(data, to_undirected=True)
-
-# visualize_graph(G, color=data.y)
-
 
 # GCN模型定义
 class GCN(torch.nn.Module):
@@ -81,11 +44,11 @@ class GCN(torch.nn.Module):
         # torch.manual_seed(1234)
         # 就是每一个节点的维度，在这里是34
         # 4表示4维的
-        self.conv1 = GCNConv(features_num, 8)
+        self.conv1 = GCNConv(features_num, 32)
         # 在经过一个4*4的卷积
-        self.conv2 = GCNConv(8, 8)
+        self.conv2 = GCNConv(32, 16)
         # 在经过一个4*4的卷积
-        self.conv3 = GCNConv(8, 8)
+        self.conv3 = GCNConv(16, 8)
         # 最后经过一个MLP输出，
         # dataset.num_classes就是分类的类别，这里就是4
         self.classifier = Linear(8, 4)
@@ -108,46 +71,56 @@ y = model.forward(data.x, data.edge_index)
 
 # visualize_embedding(h, color=data.y)
 
-criterion = torch.nn.CrossEntropyLoss()  # Define loss criterion.
+loss_fun = torch.nn.CrossEntropyLoss()  # Define loss criterion.
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)  # Define optimizer.
 
 
-for epoch in range(401):
-    optimizer.zero_grad()
-    out = model.forward(data.x, data.edge_index)  # h是两维向量，主要是为了咱们画个图
-    loss = criterion(out[data.train_mask], data.y[data.train_mask])  # semi-supervised
-    loss.backward()
-    optimizer.step()
-    if epoch % 10 == 0:
-        print(f'Epoch: {epoch}，Loss: {loss.item() :.4f}')
-
-def predict(model, data):
+def predict(model, data, is_train = False):
     out = model.forward(data.x, data.edge_index)
     sf = torch.softmax(out, dim=1)
     pred = torch.argmax(sf, dim=1)
     # print('pred = ', pred)
     # print('y[i] = ', data.y)
-    print('train_mask[i] = ', data.train_mask)
+    # if not is_train:
+    #     print('train_mask[i] = ', data.train_mask)
 
     counter = 0
     counter_true = 0
     for i, flag in enumerate(data.train_mask):
         if flag:
-            # 训练
-            print(f'{i}, 还是原来的分类吗？ {pred[i] == data.y[i]}', pred[i], data.y[i])
+            # 训练集验证
+            if not is_train:
+                print(f'{i}, 还是原来的分类吗？ {pred[i] == data.y[i]}', pred[i], data.y[i])
         else:
             # 预测
-            print(f'{i}, ======== 分类正确了吗？ {pred[i] == data.y[i]}', pred[i], data.y[i])
+            if not is_train:
+                print(f'{i}, ======== 分类正确了吗？ {pred[i] == data.y[i]}', pred[i], data.y[i])
             if pred[i] == data.y[i]:
                 counter_true += 1
             counter += 1
 
-    print(counter_true,counter, counter_true/counter)
+    print(f'验证总数 {counter}， 正确数{counter_true}，正确率 {counter_true/counter}')
+
+
+def train(model, loss_fun, optimizer, data, epochs):
+    for epoch in range(epochs):
+        optimizer.zero_grad()
+        out = model.forward(data.x, data.edge_index)
+        loss = loss_fun(out[data.train_mask], data.y[data.train_mask])  # semi-supervised
+        loss.backward()
+        optimizer.step()
+        if epoch % 10 == 0:
+            print(f'Epoch: {epoch}，Loss: {loss.item() :.4f}')
+            predict(model, data, is_train=True)
+
+train(model, loss_fun, optimizer, data, 500)
 
 
 
 predict(model, data)
 
+# torch.save(model, 'model.pth')
+# model = torch.load('model.pth')
 
 def test_softmax():
     sf = torch.softmax(torch.tensor([0.0416, 0.0215, 0.0250, 0.0235]), dim=0)

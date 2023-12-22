@@ -42,6 +42,7 @@
 1. DGL （Deep Graph Library）
    - https://www.dgl.ai/
 2. PyG （PyTorch Geometric）
+   - https://github.com/pyg-team/pytorch_geometric.git
    - https://pytorch-geometric.readthedocs.io/en/latest/index.html
 3. Graph Nets
    - https://github.com/google-deepmind/graph_nets
