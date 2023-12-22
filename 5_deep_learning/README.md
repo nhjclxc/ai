@@ -9,9 +9,41 @@
 - 教材：https://zh-v2.d2l.ai/  ，pdf地址：https://zh-v2.d2l.ai/d2l-zh-pytorch.pdf
 - 论坛：https://discuss.pytorch.org/
 - 
-2.  深度学习（重点：多层感知机、卷积）
+2.  深度学习（重点：多层感知机）
 3.  cs224w
 - http://web.stanford.edu/class/cs224w/
 4. 
 5. z
 
+
+## 图神经网络（Graph Neural Networks，GNN）
+
+### 必学课程
+1. Stanford Course: CS224W Machine Learning with Graphs
+   - https://web.stanford.edu/class/cs224w/
+   - test4_cs224w
+2. ‘Network Science’ by Albert-László Barabási
+   - http://networksciencebook.com/
+3. Graph Representation Learning Book by William L. Hamilton
+   - https://www.cs.mcgill.ca/~wlh/grl_book/
+   - https://www.cs.mcgill.ca/~wlh/grl_book/files/GRL_Book.pdf
+   - 书籍路径：[/5_deep_learning/test4_cs224w/course_materials/Graph Representation Learning GRL_Book.pdf]
+4. Github Repository: Collection of Recent GNN Papers
+   - https://github.com/thunlp/GNNPapers.git
+5. Graph Neural Network Papers With Code
+   - https://paperswithcode.com/search?q_meta=&q=graph+neural+networks
+6. 宾夕法尼亚大学 Graph Neural Networks 
+   - https://gnn.seas.upenn.edu/
+7. z
+
+
+### Lib
+    
+1. DGL （Deep Graph Library）
+   - https://www.dgl.ai/
+2. PyG （PyTorch Geometric）
+   - https://pytorch-geometric.readthedocs.io/en/latest/index.html
+3. Graph Nets
+   - https://github.com/google-deepmind/graph_nets
+4. Spektral
+   - https://graphneural.network/
