@@ -22,6 +22,11 @@
 1. Stanford Course: CS224W Machine Learning with Graphs
    - https://web.stanford.edu/class/cs224w/
    - test4_cs224w
+   - https://shenhao-stu.github.io/CS224W-Fall2021/#/
+   - https://github.com/shenhao-stu/CS224W-Fall2021.git
+   - 
+   - https://www.bilibili.com/video/BV1RZ4y1c7Co
+   - https://github.com/shenhao-stu/CS224W-Fall2021.git
 2. ‘Network Science’ by Albert-László Barabási
    - http://networksciencebook.com/
 3. Graph Representation Learning Book by William L. Hamilton
