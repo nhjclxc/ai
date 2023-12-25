@@ -285,8 +285,8 @@ def cpg2pyg(dot_data_list):
         for key, value in node_map.items():
             node_index_map[value] = len(node_list)
             node_list.append(value)
-
-        x = node_embeds(torch.tensor(node_vocab[node_list], dtype=torch.long))
+        y = node_vocab[node_list]
+        x = node_embeds(torch.tensor(y, dtype=torch.long))
         # print('获取嵌入', x)
 
         # 3.2 构造边  边属性构造
@@ -312,13 +312,13 @@ def cpg2pyg(dot_data_list):
             attr = edge_embeds(torch.tensor(edge_label_vocab[map['label']], dtype=torch.int)).reshape(1, embedding_size)
             edge_attr = torch.cat((edge_attr, attr), dim=0)
 
-        # [Data(x=[5, 16], edge_index=[2, 7], edge_attr=[7, 16])]
+        # [Data(x=[5, 16], y=[5], edge_index=[2, 7], edge_attr=[7, 16])]
         # x=[5, 16]表示节点：5表示有5个节点，16表示每一个节点有16个特征向量
+        # y=[5]表示节点的标签：5就是有5个节点，即类似[,,,,]，每一个位置存储的就是对应节点的标签，这里是词汇表的索引
         # edge_index=[2, 7]表示边：2表示源src和tag目标，7表示有7条边
         # edge_attr=[7, 16]表示边属性，7表示有7条边，16表示每一条边是一个包含16维的特征向量
-        data = Data(x=x, edge_index=edge_index, edge_attr = edge_attr)
-        # print(data.x)
-        # print(data.edge_index)
+        data = Data(x=x, y=y, edge_index=edge_index, edge_attr = edge_attr)
+        # print(data)
         all_dataset.append(data)
 
         # 测试  构造一个含有节点，边和边特征的pyg图结构
@@ -334,7 +334,7 @@ def cpg2pyg(dot_data_list):
         #                             [0.5, 0.6]], dtype=torch.float)  # 示例的边属性
         # Data.Data(x=x, edge_index=edge_index, edge_attr=edge_attr)
 
-    return all_dataset
+    return all_dataset, node_vocab
 
 
 def test4_cpg2pyg():

@@ -164,8 +164,9 @@ dim_feature = 16
 # data = Data(x=x, edge_index=edge_index)
 
 # data = custom_dataset
-data = cpg2pyg(dot_data_list)
-print(data)
+data, node_vocab = cpg2pyg(dot_data_list)
+# print(data)
+print(len(node_vocab))
 
 # 2. 定义 GAT 模型：
 import torch
@@ -186,9 +187,9 @@ class GATNodeRecommendation(nn.Module):
 
 # 3. 模型训练：
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = GATNodeRecommendation(in_channels=16, out_channels=8, heads=2).to(device)
+model = GATNodeRecommendation(in_channels=16, out_channels=len(node_vocab), heads=2).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-loss_fun = nn.CrossEntropyLoss(reduction='mean')
+loss_fun = nn.CrossEntropyLoss(reduction='mean') # F.nll_loss
 
 def train(model, train_dataset, optimizer, loss_fun, epochs = 100):
     model.train()
@@ -197,13 +198,13 @@ def train(model, train_dataset, optimizer, loss_fun, epochs = 100):
         for i, data in enumerate(train_dataset):
             optimizer.zero_grad()
             out = model(data)
-            # loss = F.nll_loss(out, torch.tensor([0, 1, 2, 3]))  # 通过loss function指定节点
-            loss = loss_fun(out, torch.tensor([i for _ in range(data.x.size(0))]))  # 通过loss function指定节点
-            # loss = loss_fun(out)  # 通过loss function指定节点
+            tag = torch.tensor(data.y)
+            loss = loss_fun(out, tag)  # 通过loss function指定节点
             loss.backward(retain_graph=True)
             optimizer.step()
             loss_sum += loss.item()
-        print(f'Epoch [{epoch + 1}], Loss: {loss_sum/len(train_dataset)}')
+        if epoch % 10 == 0:
+            print(f'Epoch [{epoch + 1}], Loss: {loss_sum/len(train_dataset)}')
     print('训练结束')
 
 train(model, data, optimizer, loss_fun, 100)
@@ -239,7 +240,7 @@ def beam_search(model, data, k, width, depth):
 
 
 # 测试集数据# 定义你的测试集数据
-test_data = CustomDataset.generate_random_graph(12)
+test_data = data[1]
 
 # 选择一个节点作为初始节点，假设是第一个节点
 initial_node = 0
@@ -251,4 +252,5 @@ top_k_paths = beam_search(model, test_data, k=5, width=2, depth=3)
 print("Top k paths:")
 for path in top_k_paths:
     print(path)
+    print(node_vocab.to_tokens([path]))
 
