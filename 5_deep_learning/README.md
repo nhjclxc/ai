@@ -18,6 +18,10 @@
 
 ## 图神经网络（Graph Neural Networks，GNN）
 
+### 论文
+1. https://github.com/wusw14/GNN-in-RS.git
+
+
 ### 必学课程
 1. Stanford Course: CS224W Machine Learning with Graphs
    - https://web.stanford.edu/class/cs224w/

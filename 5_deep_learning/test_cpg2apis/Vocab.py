@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 # Author    : LuoXianchao
 # Datetime  : 2023/12/23 15:02
-# Module    : test02_vocab.py
+# Module    : Vocab.py
 # explain   : 构建字典 词汇表 test2_impl_vocabulary.py
 
 import collections
-import re
 
 '''
 将labels可以类比为接口api，对所有的api接口进行编码，以获得每一个api的索引，即获得了api集合的词汇表Vocab
@@ -66,15 +65,20 @@ class Vocab:
         # 剔除小于最小频率的，并返回
         return [(token, freq) for token, freq in sorted_counter if freq >= min_feq]
 
-# 测试
-tokens = ['cat', 'dog', 'mouse','mouse','mouse','mouse','mouse', 'cat', 'dog', 'dog']
-vocab = Vocab(tokens)
-print(list(vocab._token2idx.items()))
 
-for i, v in enumerate(list(vocab._token2idx.items())):
-    print(i, v)
+if __name__ == '__main__':
+    # 测试
+    tokens = ['cat', 'dog', 'mouse', 'mouse', 'mouse', 'mouse', 'mouse', 'cat', 'dog', 'dog']
+    vocab = Vocab(tokens)
+    print(list(vocab._token2idx.items()))
 
-length = len(vocab._token2idx.items())
-for i in range(length):
-    token = vocab.to_tokens([i])
-    print(i, ' 文本:', token, '索引:', vocab[token])
+    for i, v in enumerate(list(vocab._token2idx.items())):
+        print(i, v)
+
+    length = len(vocab._token2idx.items())
+    for i in range(length):
+        token = vocab.to_tokens([i])
+        print(i, ' 文本:', token, '索引:', vocab[token])
+
+    print(len(vocab._token2idx.items()))
+    print(len(vocab))
