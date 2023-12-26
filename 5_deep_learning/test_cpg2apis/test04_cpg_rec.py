@@ -109,7 +109,43 @@ v4 -> v5 [label="PDG"];
 }
 '''
 
+data_cpg2pyg2 = '''
+digraph foo_CPG {
+ // graph-vertices
+ v1 [label="methodDeclaration:void foo(int yx)";]
+ v2 [label="formalParameterList:(int yx)";]
+ v3 [label="formalParameter:int yx";]
+ v4 [label="identifier:yx";]
+ v6 [label="localVariableDeclaration:int x = source();";]
+ v7 [label="ifStatement:if( x < Max)";]
+ v9 [label="localVariableDeclaration:int y = 2 * x;";]
+ v10 [label="statementExpression:sink(y)";]
+ v11 [label="endIf:end if";]
+ // graph-edges
+ v1 -> v2 [label="AST"];
+ v2 -> v3 [label="AST"];
+ v3 -> v4 [label="AST"];
+ v1 -> v6 [label="FLOWS_TO"];
+ v1 -> v6 [label="CDG_EPSILON"];
+ v6 -> v7 [label="FLOWS_TO"];
+ v1 -> v7 [label="CDG_EPSILON"];
+ v7 -> v9 [label="FLOWS_TO_TRUE"];
+ v7 -> v9 [label="CDG_TRUE"];
+ v9 -> v10 [label="FLOWS_TO"];
+ v7 -> v10 [label="CDG_EPSILON"];
+ v10 -> v11 [label="FLOWS_TO"];
+ v7 -> v11 [label="FLOWS_TO_FALSE"];
+ v9 -> v10 [label=" (y)"];
+ v6 -> v7 [label=" ($THIS.Max)"];
+ v6 -> v7 [label=" (x)"];
+ v6 -> v9 [label=" (x)"];
+ // end-of-graph
+}
+
+'''
+
 dot_data_list = [dot_data, dot_data2, data_cpg2pyg]
+dot_data_list = [data_cpg2pyg2]
 
 class CustomDataset(Dataset):
     def __init__(self, num_graphs, num_node, dim_feature, num_edge = None):
@@ -240,7 +276,7 @@ def beam_search(model, data, k, width, depth):
 
 
 # 测试集数据# 定义你的测试集数据
-test_data = data[1]
+test_data = data[0]
 
 # 选择一个节点作为初始节点，假设是第一个节点
 initial_node = 0
