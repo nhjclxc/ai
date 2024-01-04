@@ -11,7 +11,7 @@ import torch
 from torch_geometric.data import Data
 from itertools import chain
 
-from test_cpg2apis.Vocab import Vocab
+from test11_cpg2apis.Vocab import Vocab
 
 # DOT 格式图数据
 dot_data = '''

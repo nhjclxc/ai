@@ -1,0 +1,12 @@
+https://blog.finxter.com/python-beam-search-algorithm/
+
+https://www.phontron.com/slides/nlp-programming-en-13-search.pdf
+
+https://cl.lingfil.uu.se/kurs/MT20/lab_beamsearch.html
+
+https://github.com/rycolab/bfbs.git
+
+https://www.tensorflow.org/addons/api_docs/python/tfa/seq2seq/BeamSearchDecoder
+
+
+https://nlp.gluon.ai/examples/sequence_sampling/sequence_sampling.html
