@@ -8,11 +8,16 @@
 - 在线地址：https://courses.d2l.ai/zh-v2/【或者：https://zh.d2l.ai/chapter_preface/index.html】，
 - 教材：https://zh-v2.d2l.ai/  ，pdf地址：https://zh-v2.d2l.ai/d2l-zh-pytorch.pdf
 - 论坛：https://discuss.pytorch.org/
-- 
+
 2.  深度学习（重点：多层感知机）
 3.  cs224w
 - http://web.stanford.edu/class/cs224w/
-4. 
+
+4. 国立台湾大学 李宏毅2021/2022春机器学习课程 
+- https://speech.ee.ntu.edu.tw/~hylee/ml/2022-spring.php
+- https://www.youtube.com/playlist?list=PLJV_el3uVTsPM2mM-OQzJXziCGJa8nJL8，（https://www.youtube.com/playlist?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J）
+- https://github.com/virginiakm1988/ML2022-Spring.git
+
 5. z
 
 

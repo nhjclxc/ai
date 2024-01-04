@@ -27,8 +27,13 @@ DataFrame.dropna(axis=0, how='any', thresh=None, subset=None, inplace=False)
 print('\n\n1.Pandas 清洗空值')
 df = pd.read_csv('property-data.csv')
 print(df)
+print(df['ST_NUM'])
+print(df['ST_NAME'])
+print()
+print()
 df2 = df.dropna(axis=0, how='any')  # NaN的那些行将被删除
 print(df)
+print()
 print(df2)
 
 print('\n\n判断那些元素是null')
@@ -39,8 +44,8 @@ print(df['NUM_BEDROOMS'].isnull())
 # 读取csv文件时，遇到下面列表里面的数据就会将其读取为NaN
 na_values = ['NaN', 'na', '--']
 df2 = pd.read_csv('property-data.csv', na_values=na_values)
-print(df2['NUM_BEDROOMS'])
-print(df2['NUM_BEDROOMS'].isnull())
+print("df2['NUM_BEDROOMS']", df2['NUM_BEDROOMS'])
+print("df2['NUM_BEDROOMS'].isnull()", df2['NUM_BEDROOMS'].isnull())
 
 print('\n\n用某个值来填充空值')
 print(df2)
