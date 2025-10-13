@@ -69,14 +69,15 @@ def findMinAndMax(L):
     '''
     if not isinstance(L, Iterable):
         raise TypeError('对象不可迭代')
-    min = max = None
-    if L and len(L) > 0:
-        min = max = L[0]
-        for i in L:
-            if i > max:
-                max = i
-            if i < min:
-                min = i
+    if not L:
+        return None, None
+
+    min = max = L[0]
+    for i in L:
+        if i > max:
+            max = i
+        if i < min:
+            min = i
 
     return (min, max)
 
@@ -120,7 +121,7 @@ def range_test():
     print(list(x * x for x in range(10)))
 
     # 生成'ABC'和'xyz'的全排列
-    print(list(m + n for m in 'ABC' for n in 'xyz'))
+    print(list(m + n for m in 'ABC' for n in 'xyz'))  # 二层循环
 
     # 列出当前目录下的所有文件和目录名
     currIdr = os.listdir('../')
@@ -133,18 +134,17 @@ def range_test():
     # for后面的if不能带else，而for前面的表达式有if的话必须带上else
     # print(list(x * x for x in range(10) if x % 2 == 0 else 1))
     # 下面的意思是x%2==0成立的话输出的结果是x*x，否则输出1
-    print(' if ... else ... for', list(x * x if x % 2 == 0 else 1 for x in range(10)))
+    print(' if ... else ... for', list(x * x if x % 2 == 0 else 1 for x in range(10)))  # 先执行for range之后才执行if的三元表达式
 
     # 综上：可见，在一个列表生成式中，for前面的if ... else是表达式，而for后面的if是过滤条件，不能带else
-
-
 
     dict1 = {'key1': 'value1', 'key2': 'value2', 'key3': 'value3'}
     for k, v in dict1.items():
         print(k, v)
-    print(list(k + '=' +v for k, v in dict1.items() ))
+    print(list(k + '=' + v for k, v in dict1.items()))
 
     pass
+
 
 def test():
     L1 = ['Hello', 'World', 18, 'Apple', None]
@@ -157,18 +157,28 @@ def test():
         print('测试失败!')
     pass
 
+
 if __name__ == '__main__':
     # dict_iter()
     #
     # test1()
     #
-    # list_iter()
+    list_iter()
 
     # findMinAndMax_test()
 
     # range_test()
-    test()
+    # test()
 
     # list、dict、str等数据类型不是Iterator
     # 集合数据类型如list、dict、str等是Iterable但不是Iterator，不过可以通过iter()函数获得一个Iterator对象。
     pass
+
+    print("=============")
+
+    dict1 = {'key1': 'value1', 'key2': 'value2', 'key3': 'value3'}
+    for k in dict1:
+        print(k, dict1.get(k), dict1[k])
+    print("=============")
+    for k, v in dict1.items():
+        print(k, v)

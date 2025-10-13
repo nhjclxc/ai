@@ -7,6 +7,7 @@ def fac(n):
     else:
         return fac(n - 1) * n
 
+
 def factorial(n):
     return 1 if n < 2 else n * factorial(n - 1)
 
@@ -27,13 +28,17 @@ def factorial3(n):
         result *= i
     return result
 
+
 def my_abs(x):
     if x > 0:
         return x
     else:
         return -x
+
+
 def my_abs2(x):
     return x if x > 0 else -x
+
 
 def quadratic(a, b, c):
     '''
@@ -45,20 +50,22 @@ def quadratic(a, b, c):
     '''
     if not isinstance(a, (int, float)) \
             or not isinstance(b, (int, float)) \
-            or not isinstance(c, (int, float)) :
+            or not isinstance(c, (int, float)):
         raise RuntimeError('数据类型不匹配')
     detar = b * b - 4 * a * c
     if detar < 0:
         # raise RuntimeError('此方程无解')
         sq = math.sqrt(-detar)
-        return complex(-b/2*a, sq), complex(-b/2*a, -sq)
+        return complex(-b / 2 * a, sq), complex(-b / 2 * a, -sq)
 
     sq = math.sqrt(detar)
     x1 = (-b + sq) / (2 * a)
     x2 = (-b - sq) / (2 * a)
     return (x1, x2)
 
+
 default_n = 2
+
 
 def power(x, n=default_n):
     s = 1
@@ -67,12 +74,16 @@ def power(x, n=default_n):
         n -= 1
     return s
 
+
 # 定义默认参数要牢记一点：默认参数必须指向不变对象！
 ''' 默认参数必须指向不可变对象 '''
-def test_default_param(list = []):
+
+
+def test_default_param(list=[]):
     ''' 测试可变参数作为默认参数 '''
     list.append('end')
     return list
+
 
 def test_default_param_2(list=None):
     ''' 测试可变参数作为默认参数 '''
@@ -115,15 +126,9 @@ if __name__ == '__main__':
     # print(power(3, 3))
     # print(power(3, -1))
 
-    print(test_default_param()) # ['end']
-    print(test_default_param()) # ['end', 'end']
-    print(test_default_param()) # ['end', 'end', 'end']
+    print(test_default_param())  # ['end']
+    print(test_default_param())  # ['end', 'end']
+    print(test_default_param())  # ['end', 'end', 'end']
     print(test_default_param_2())
     print(test_default_param_2())
     print(test_default_param_2())
-
-
-
-
-
-

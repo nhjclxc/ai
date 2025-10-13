@@ -13,20 +13,21 @@ from arrow import now
 def fun1(name, age, addr, hobby):
     print(f'name = {name}，age = {age}，addr = {addr}，hobby = {hobby}')
 
-fun1('zhangsan', 23, '你的地址','吃喝玩乐')
 
-fun1('你的地址', 'zhangsan','吃喝玩乐','23')  # ？？？？？
+fun1('zhangsan', 23, '你的地址', '吃喝玩乐')
 
+fun1('你的地址', 'zhangsan', '吃喝玩乐', '23')  # ？？？？？
 
 # 2.必备参数__键值对传参（关键字参数）
-fun1(addr='你的地址', name='zhangsan', hobby= '看斗鱼', age=23)
+fun1(addr='你的地址', name='zhangsan', hobby='看斗鱼', age=23)
 
 
 # 3.默认可省略参数
 def fun3(name, age, addr, hobby='看抖音'):
     print(f'name = {name}，age = {age}，addr = {addr}，hobby = {hobby}')
 
-fun3(addr='你的地址', name='zhangsan', hobby= '看斗鱼', age=23)
+
+fun3(addr='你的地址', name='zhangsan', hobby='看斗鱼', age=23)
 fun3(addr='你的地址', name='zhangsan', age=23)
 
 
@@ -37,32 +38,37 @@ fun3(addr='你的地址', name='zhangsan', age=23)
 
 # 字典 dict = {'key' : value}、列表 list = [v1,v2,v3...]、元组tuple = (v1,v2,v3...)
 # 5.字典参数 dict = {'key' : value}
-def fun5(dict):
-    print(f"dict['key1'] = {dict['key1']}")
-    print(f"dict['key2'] = {dict['key2']}")
-    print(f"dict['key3'] = {dict['key3']}")
+def fun5(dt):
+    print(f"dict['key1'] = {dt['key1']}")
+    print(f"dict['key2'] = {dt['key2']}")
+    print(f"dict['key3'] = {dt['key3']}")
     print('\n')
 
-fun5({'key1' : 'asd','key2' :  2345,'key3' :  now()})
+
+fun5({'key1': 'asd', 'key2': 2345, 'key3': now()})
+
+
 # fun5({'key1' : 'asd','key2' :  2345,'qqqqq' :  now()}) # KeyError: 'key3'
 
 
 # 6.列表参数 list = [v1,v2,v3...]
-def fun6(list):
-    print(f'list[0] = {list[0]}')
-    print(f'list[1] = {list[1]}')
-    print(f'list[2] = {list[2]}')
+def fun6(ls):
+    print(f'list[0] = {ls[0]}')
+    print(f'list[1] = {ls[1]}')
+    print(f'list[2] = {ls[2]}')
     print('\n')
+
 
 fun6(['asd', 2345, now()])
 
 
 # 7.元组参数 tuple = (v1,v2,v3...)
-def fun7(tuple):
-    print(f'tuple[0] = {tuple[0]}')
-    print(f'tuple[1] = {tuple[1]}')
-    print(f'tuple[2] = {tuple[2]}')
+def fun7(tpl):
+    print(f'tuple[0] = {tpl[0]}')
+    print(f'tuple[1] = {tpl[1]}')
+    print(f'tuple[2] = {tpl[2]}')
     print('\n')
+
 
 fun7(('asd', 2345, now()))
 
@@ -74,10 +80,11 @@ def fun8(i, *params):
         print(param)
     print('\n')
 
-fun8(666,'zhangsan', 23, '你的地址','吃喝玩乐')
-fun8(666, 888, 'zhangsan', 23, '你的地址','吃喝玩乐')
-fun8(666, [888, 'zhangsan', 23, '你的地址','吃喝玩乐']) # []被当成整体
-fun8(666, (888, 'zhangsan', 23, '你的地址','吃喝玩乐')) # ()当成整体
+
+fun8(666, 'zhangsan', 23, '你的地址', '吃喝玩乐')
+fun8(666, 888, 'zhangsan', 23, '你的地址', '吃喝玩乐')
+fun8(666, [888, 'zhangsan', 23, '你的地址', '吃喝玩乐'])  # []被当成整体
+fun8(666, (888, 'zhangsan', 23, '你的地址', '吃喝玩乐'))  # ()当成整体
 
 
 # 9.不定长字典参数（**kwargs）  keyword arguments
@@ -89,7 +96,13 @@ def fun9(**kwargs):
     """
     for k, v in kwargs:
         print(f'k = {k}, v = {v}')
-    for k, v in kwargs.items(): # 使用items方法来获取字典的键值对
+    for key in kwargs:
+        print(key, kwargs[key])
+    for key in kwargs.keys():
+        print(key, kwargs[key])
+    for val in kwargs.values():
+        print(val)
+    for k, v in kwargs.items():  # 使用items方法来获取字典的键值对
         print(f'k = {k}, v = {v}')
     '''
     kwargs 是包含关键字参数的字典本身。(返回字典对象)
@@ -99,7 +112,9 @@ def fun9(**kwargs):
     print(kwargs['k2'])
     print(kwargs['k3'])
 
-fun9(k1 = 'v11', k2 = 'v22', k3 = 'v33')
+print(999)
+fun9(k1='v11', k2='v22', k3='v33')
+print(999)
 
 
 # python的参数传递是值传递
@@ -109,19 +124,22 @@ def fun10(**kw):
     if 'age' in kw:
         print(f"来源可变参数：age = {kw['age']}")
 
-kw = {'name' : 'zhangsan', 'age' : 18, 'addr' : 'hk'}
+
+kw = {'name': 'zhangsan', 'age': 18, 'addr': 'hk'}
 # fun10(kw) # TypeError: fun10() takes 0 positional arguments but 1 was given
 fun10(**kw)
+
 
 def f1(a, b, c=0, *args, **kw):
     print('a =', a, 'b =', b, 'c =', c, 'args =', args, 'kw =', kw)
 
-f1(1,2,3,kw='kw')
-f1(a = 1, b = 2,kw='kw')
+
+f1(1, 2, 3, kw='kw')
+f1(a=1, b=2, kw='kw')
 
 
 def mul(*args):
-    '''可接收一个或多个数并计算乘积'''
+    """可接收一个或多个数并计算乘积"""
 
     if len(args) == 0:
         raise TypeError('缺少参数')
@@ -129,6 +147,7 @@ def mul(*args):
     for a in args:
         mul_ret *= a
     return mul_ret
+
 
 print('mul(5) =', mul(5))
 print('mul(5, 6) =', mul(5, 6))
@@ -148,4 +167,3 @@ else:
         print('测试失败!')
     except TypeError:
         print('测试成功!')
-

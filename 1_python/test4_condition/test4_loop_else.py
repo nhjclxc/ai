@@ -22,7 +22,6 @@ while count < 5:
 else:
     print("Loop finished without any break.")
 
-
 '''
 for...else： 在 for 循环正常完成（没有因为遍历完可迭代对象而提前退出）时执行 else 块。
     如果 for 循环没有被 break 中止，则会执行 else 块。
@@ -31,6 +30,7 @@ for...else： 在 for 循环正常完成（没有因为遍历完可迭代对象�
 '''
 numbers = [1, 2, 3, 4, 5]
 for num in numbers:
+    print(f"num = {num}")
     # if num == 0:
     if num == 2:
         print("Zero detected!")

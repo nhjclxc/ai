@@ -7,6 +7,7 @@
     如`list()`、`tuple()`、`dict()`和`set()`
 '''
 
+
 def dict_test():
     '''
         需要牢记的第一条就是dict的key必须是不可变对象
@@ -15,13 +16,14 @@ def dict_test():
     print(dict)
     # 添加元素
     dict['key2'] = 666
-    dict.update({'key3' : 555, 'key4' : "value4"})# 同时添加多个元素
+    dict.update({'key3': 555, 'key5': "value5"})  # 同时添加多个元素
     print(dict)
     # 移除指定元素
     print(dict.pop('key3'))
     print(dict)
     # 获取指定key对应的值
     print(dict.get('key3'))
+    # print(dict['key3'])  # KeyError
     print(dict.get('key2'))
     # 获取字典的键值对列表
     print(dict.items())
@@ -30,10 +32,9 @@ def dict_test():
     for k, v in dict.items():
         print(f'k = {k}，v = {v}')
 
-
-    tt = (1,2,3)
-    tt2 = (1,2,3,[1,2,3])
-    ll = [1,2,3]
+    tt = (1, 2, 3)
+    tt2 = (1, 2, 3, [1, 2, 3])
+    ll = [1, 2, 3]
     dict = {}
     dict[tt] = 'tuple'
     # dict的key只能是不变对象，而list是可变对象所以西面保存，而上面不会保存
@@ -41,21 +42,21 @@ def dict_test():
     # dict[tt2] = 'tuple-list' # TypeError: unhashable type: 'list'
     print(dict)
 
+
 def set_test():
     '''
         set不能重复  set = {v1, v1, v1, v3 ...}
     '''
-    set1 = {1,2,3,4,5,5,5,}
+    set1 = {1, 2, 3, 4, 5, 5, 5}
     print(set1)
     print(len(set1))
 
-    # set2 = {1,2,3, [1,2,3]}
-    # set3 = {1,2,3, [1,2,3]}
-    # print(id(set3),id(set2))
+    # set2 = {1, 2, 3, [1, 2, 3]}  # TypeError: unhashable type: 'list'
+    # set3 = {1, 2, 3, [1, 2, 3]}  # TypeError: unhashable type: 'list'
 
     # 交集 并集 差集，对称差集，子集，超级
-    s1 = {0,1,2,3,4,5,6}
-    s2 = {4,5,6,7,8,9}
+    s1 = {0, 1, 2, 3, 5, 6}
+    s2 = {5, 6, 7, 8, 9}
     # 交集
     print(s1.intersection(s2))
     print(s1 & s2)
@@ -68,12 +69,15 @@ def set_test():
     # 对称差集
     print(s1.symmetric_difference(s2))
     print(s1 ^ s2)
+    print((s1 - s2) | (s2 - s1))
     # {1,2,3}是否是s1的子集，也就是说{1,2,3}里面的所有元素是不是都被s1包含了
-    print({1,2,3}.issubset(s1))
+    print({1, 2, 3}.issubset(s1))
+    print({1, 2, 3, 8}.issubset(s1))
     # s1是否是{1,2,3}的超级
-    print(s1.issuperset({1,2,3}))
+    print(s1.issuperset({1, 2, 3}))
 
     pass
+
 
 def list_test():
     ''' 列表 list = [v1, v2, v3...]
@@ -84,6 +88,8 @@ def list_test():
     # 追加
     list.append(1856)
     print(list)
+    print(list)
+    print(list)
     # 指定位置插入元素
     list.insert(2, 88888)
     print(list)
@@ -93,6 +99,7 @@ def list_test():
     # 获取指定元素的索引
     print(list.index(88888))
     print(list.index(88888, 0, 5))
+    # print(list.index(88888, 5, 6))  # ValueError: 88888 is not in list
     # print(list.index(99999)) #要查找的元素不在列表时，抛出以下异常，如果是在列表里面查找指定元素并且返回对应索引的话就要加异常捕获了 ValueError: 99999 is not in list
     print(find_index(list, 88888))
     print(find_index(list, 99999))
@@ -151,12 +158,14 @@ def list_test():
 
     print()
 
+
 def find_index(lst, element):
     try:
         index = lst.index(element)
         return index
     except ValueError:
         return None  # 如果元素不在列表中，返回 None 或者其他你认为合适的值
+
 
 def tuple_test():
     '''
@@ -165,16 +174,16 @@ def tuple_test():
     '''
     tuple1 = ('张三', '里斯', '撒擦啊是')
     print(tuple1.index('张三'))
-    # print(tuple1.index('张s三'))
+    # print(tuple1.index('张s三'))  # ValueError: tuple.index(x): x not in tuple
+    print(find_index(tuple1,'张s三'))
 
-    t2 = (666) # 这个是什么？ 数字666还是元组(666)？
-    print(f't2 = {t2}, type(t2) = {type(t2)}') #可以看出是一个数字<class 'int'>
+    t2 = (666)  # 这个是什么？ 数字666还是元组(666)？
+    print(f't2 = {t2}, type(t2) = {type(t2)}')  # 可以看出是一个数字<class 'int'>
     # 一下是定义一个元组变量的方法，就是在后面加一个逗号,
-    t3 = (666, )
-    print(f't3 = {t3}, type(t3) = {type(t3)}') # <class 'tuple'>
+    t3 = (666,)
+    print(f't3 = {t3}, type(t3) = {type(t3)}')  # <class 'tuple'>
 
     # 二维tuple和二维列表一样
-
 
     tt = ([123, 456, 789], 111)
     print(tt)
@@ -182,14 +191,18 @@ def tuple_test():
     print(ll)
     ll.append(666)
     print(ll)
+    print(tt)  # 可以看出，修改的是底层原数据
 
     pass
+
 
 '''
 列表list和元组tuple有什么区别
 '''
+
+
 def list_tuple_test():
-    tl = ('v0',('v10','v11','v12'), ['v20','v21','v22'])
+    tl = ('v0', ('v10', 'v11', 'v12'), ['v20', 'v21', 'v22'])
     print(tl)
     # tl[0] = 'sss' # TypeError: 'tuple' object does not support item assignment
     tl1 = tl[1]
@@ -198,8 +211,9 @@ def list_tuple_test():
     print(tl2)
     tl2.append('666')
     print(tl2)
+    print(111)
 
-    ss = ('莉莉', '晴晴', '圆圆', ['小明', '小红', ['小粉', '小鬼'], '壮壮'])
+    ss = ('莉莉', '晴晴', '圆圆', ['小明', '小红', ['小粉', '小a'], '壮壮'])
     print(ss)
     ss[3][2].pop()
     print(ss)
@@ -207,6 +221,7 @@ def list_tuple_test():
     print(ss)
 
     pass
+
 
 def slice_test():
     '''切片操作，是一个前开后闭的切片操作 ( ]
@@ -216,42 +231,32 @@ def slice_test():
         step切片步长默认为1
     '''
     my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    print(my_list[1 : 6 : 1])
-    print(my_list[1 : 6 : 2])
-    print(my_list[3 : ])
-    print(my_list[ : 3])
-    print(my_list[ : ])  # 原始列表，表示了
+    print(my_list[1: 6: 1])
+    print(my_list[1: 6: 2])
+    print(my_list[3:])
+    print(my_list[: 3])
+    print(my_list[:])  # 原始列表，表示了
     # 利用步长-1，将list进行逆置
-    print(my_list[ : : - 1])  # [9, 8, 7, 6, 5, 4, 3, 2, 1]
-
+    print(my_list[:: - 1])  # [9, 8, 7, 6, 5, 4, 3, 2, 1]
 
     my_tuple = (1, 2, 3, 4, 5, 6, 7, 8, 9)
-    print(my_tuple[1 : 6 : 1])
-    print(my_tuple[1 : 6 : 2])
-    print(my_tuple[3 : ])
-    print(my_tuple[ : 3])
-    print(my_tuple[ : ])  # 原始列表，表示了
+    print(my_tuple[1: 6: 1])
+    print(my_tuple[1: 6: 2])
+    print(my_tuple[3:])
+    print(my_tuple[: 3])
+    print(my_tuple[:])  # 原始列表，表示了
     # 利用步长-1，将list进行逆置
-    print(my_tuple[ : : - 1])  # [9, 8, 7, 6, 5, 4, 3, 2, 1]
-
+    print(my_tuple[:: - 1])  # [9, 8, 7, 6, 5, 4, 3, 2, 1]
 
     pass
+
 
 if __name__ == '__main__':
     # dict_test()
-    set_test()
+    # set_test()
     # list_test()
     # tuple_test()
     # list_tuple_test()
-
-    # slice_test()
-
-
-    # pp = ['福州', '泉州', '厦门', '莆田']
-    # print(pp)
-    # pp.sort()
-    # print(pp)
-
+    slice_test()
 
     pass
-

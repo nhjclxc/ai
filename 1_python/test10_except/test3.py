@@ -25,11 +25,8 @@ import traceback
 #     print('输入 结束')
 
 
-
-
-
-
 from functools import reduce
+
 
 def str2num(s):
     try:
@@ -37,13 +34,15 @@ def str2num(s):
     except ValueError as ve:
         try:
             return float(s)
-        except BaseException :
+        except BaseException:
             raise '不是数字类型，不能操作'
+
 
 def calc(exp):
     ss = exp.split('+')
     ns = map(str2num, ss)
     return reduce(lambda acc, x: acc + x, ns)
+
 
 def main():
     r = calc('100 + 200 + 345')
@@ -51,5 +50,5 @@ def main():
     r = calc('99 + 88 + 7.6')
     print('99 + 88 + 7.6 =', r)
 
-main()
 
+main()

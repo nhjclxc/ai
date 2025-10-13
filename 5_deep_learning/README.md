@@ -18,7 +18,11 @@
 - https://www.youtube.com/playlist?list=PLJV_el3uVTsPM2mM-OQzJXziCGJa8nJL8，（https://www.youtube.com/playlist?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J）
 - https://github.com/virginiakm1988/ML2022-Spring.git
 
-5. z
+5. https://nndl.github.io/,https://github.com/nndl/nndl.github.io
+
+6. https://github.com/xiaotudui/pytorch-tutorial
+7. https://github.com/kzbkzb/Python-AI
+8. z
 
 
 ## 图神经网络（Graph Neural Networks，GNN）

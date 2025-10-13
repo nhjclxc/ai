@@ -16,6 +16,7 @@ class Student:
     #     return f"{self.__class__.__name__} = {{{attributes}}}"
 
     # 在py中的to_string方法是：__str__
+    # 使用print(stu)的时候会默认使用print(stu.__str__())
     def __str__(self):
         attributes = ', '.join(f"{key} = {value}" for key, value in vars(self).items())
         return f"{self.__class__.__name__} = {{{attributes}}}"
@@ -27,14 +28,12 @@ stu = Student('张三', 18)
 print(stu)
 print(stu.__str__())
 
-
-
-
-
 '''
 如果一个类想被用于for ... in循环，类似list或tuple那样，就必须实现一个__iter__()方法，该方法返回一个迭代对象，
 然后，Python的for循环就会不断调用该迭代对象的__next__()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环。
 '''
+
+
 # 如果一个类想被用于iterator遍历，则必须实现一个__iter__()
 class Fib(object):
     def __init__(self, max):
@@ -63,11 +62,13 @@ class Fib(object):
         self.b = temp
         return temp
 
+
 fib = Fib(8)
 for f in fib.__iter__():
     print(f)
 
 print()
+
 
 # 如果想实现通过下标获取元素的值，那么就要实现__getitem__()
 class Fib2(object):
@@ -76,11 +77,11 @@ class Fib2(object):
         pass
 
     def __getitem__(self, index):
-        '''
+        """
             在内部实现斐波那契数列的求职
         :param index: 索引
         :return: 索引对应的值
-        '''
+        """
         # 下面的for循环表示对0到index的数值进行for遍历 ，类似于for(int i = 0; i < index; i++){}
         a, b = 0, 1
         if index == 0:
@@ -95,6 +96,7 @@ class Fib2(object):
             # a, sb = self.b, a + b
         return temp
 
+
 fib2 = Fib2()
 print(fib2[0])
 print(fib2[1])
@@ -107,7 +109,3 @@ print(fib2[7])
 print(fib2[8])
 
 # __getattr__()，可以动态的返回一个对象的属性
-
-
-
-

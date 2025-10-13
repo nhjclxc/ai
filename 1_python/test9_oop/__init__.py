@@ -7,7 +7,6 @@
 # explain   :
 
 
-
 class Student:
     def __init__(self, name='None', age=18):
         self.name = name
@@ -15,6 +14,7 @@ class Student:
 
     def to_string(self):
         return f'Student = {{name = {self.name}, age = {self.age}}}'
+
 
 if __name__ == '__main__':
     stu = Student()

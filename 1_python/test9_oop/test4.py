@@ -7,10 +7,10 @@
 # explain   : 获取对象信息
 
 
-
 class Student:
     # 下面的school是类属性
     school = '来自的学校'
+
     def __init__(self, name='None', age=18):
         # 下面的name，age是实列属性
         self.name = name
@@ -28,7 +28,6 @@ print(stu.name)
 # 访问类属性
 print(Student.school)
 
-
 print(type(None))
 print(type(abs))
 print(type(stu))
@@ -40,7 +39,7 @@ print(type(type(type(stu.to_string))))
 # 如果要获得一个对象的所有属性和方法，可以使用dir()函数，它返回一个包含字符串的list，
 print(dir(stu))
 
-len((1,2,3,'3'))
+len((1, 2, 3, '3'))
 
 '''
 仅仅把属性和方法列出来是不够的，配合 getattr()、setattr()以及hasattr()，我们可以直接操作一个对象的状态：
@@ -53,7 +52,6 @@ setattr(stu, 'name', '你是张三？')
 print(getattr(stu, 'name'))
 print(hasattr(stu, 'na22me'))
 print(hasattr(stu, 'name'))
-
 
 
 # 为了统计学生人数，可以给Student类增加一个类属性，每创建一个实例，该属性自动增加：

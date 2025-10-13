@@ -213,6 +213,7 @@ def createCounter():
         return x
     return counter
 
+
 if __name__ == '__main__':
     # 把某一个函数作为参数传入，那么这一条语句就是函数式编程
     # print(add(-9, 6, abs)) #将取绝对值的函数作为参数传入

@@ -34,12 +34,14 @@ print(rec.weigth)
 print(rec.heigth)
 print(rec.area)
 
+
 # 实现修改的方法：
 class Book(object):
     '''
         使用price来对外暴露
         使用_price来在内部存储
     '''
+
     def __init__(self, name: str, price: float):
         self.name = name
         self._price = price
@@ -60,6 +62,7 @@ class Book(object):
             raise RuntimeError('价格必须大于0')
         self._price = price
 
+
 '''
 通过使用@property和@xxx.setter来对某个属性进行封装之后，外部外部无法直接修改被封装的属性
 '''
@@ -67,16 +70,13 @@ class Book(object):
 # 测试
 book1 = Book('一篇小说', 16.36)
 print(book1.name)
-print(book1.price) # 直接像使用正常属性一样
+print(book1.price)  # 直接像使用正常属性一样
 # print(book1._price)
-book1.price = 52.6 # 直接像修改属性一样修改
+book1.price = 52.6  # 直接像修改属性一样修改
 print(book1.price)
+
+
 # book1.price = '52.6' # RuntimeError: 类型错误
-
-
-
-
-
 
 
 # 请利用@property给一个Screen对象加上width和height属性，以及一个只读属性resolution：
@@ -87,6 +87,7 @@ class Screen(object):
     @property
     def width(self):
         return self.__width
+
     @width.setter
     def width(self, w):
         self.__width = w
@@ -94,6 +95,7 @@ class Screen(object):
     @property
     def height(self):
         return self.__height
+
     @height.setter
     def height(self, h):
         self.__height = h
@@ -101,7 +103,10 @@ class Screen(object):
     @property
     def resolution(self):
         return self.width * self.height
+
     pass
+
+
 # 测试:
 s = Screen()
 s.width = 1024
@@ -111,6 +116,3 @@ if s.resolution == 786432:
     print('测试通过!')
 else:
     print('测试失败!')
-
-
-

@@ -10,6 +10,7 @@ elif 60 <= score <= 79:
 else:
     print('不及格')
 
+
 def print_level(score):
     if score == 100:
         print('满分')
@@ -60,6 +61,7 @@ print(match_(0))
 print(match_(80))
 print(match_(99))
 
+
 def match_list(list):
     # 列表匹配
     match list:
@@ -70,18 +72,20 @@ def match_list(list):
         case _:
             print('没见过22')
 
+
 match_list(['c++'])
 match_list(['c++', 'java'])
 
-
 # 使用一个分隔符来连接一个列表的所有元素成字符串
 l3 = ['c++', 'java', 'py']
-print('编程语言 '.join(l3))
+print('编程语言：' + '、'.join(l3))
+
 
 
 '''三元表达式
     var = value_if_true if condition else value_if_false
 '''
-n = 5
-var = n if n < 2 else n * 2
-print(var)
+n = 3
+print(n if n < 5 else n * 2)
+n = 6
+print(n if n < 5 else n * 2)

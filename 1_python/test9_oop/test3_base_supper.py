@@ -44,17 +44,17 @@ print(isinstance(cat, Animal))
 def test_animal_run(animal):
     animal.run()
 
+
 test_animal_run(animal)
 test_animal_run(dog)
 test_animal_run(cat)
-
-
 
 print()
 print()
 '''
 py的多继承
 '''
+
 
 # py的所有class默认继承 object
 class Class1(object):
@@ -66,6 +66,7 @@ class Class1(object):
     def run(self):
         print(f'{self.name}正在跑步')
 
+
 class Class2(object):
     def __init__(self, name, age):
         print('Class2.__init__', name, age)
@@ -76,11 +77,13 @@ class Class2(object):
     def fly(self):
         print(f'{self.name}正在飞翔')
 
+
 class Class3(Class1, Class2):
     '''
         第一个类被称为继承主类（直接父类），主要的属性来自第一个类，其余的父类用于提供一些功能，如接口，
             而功能的接口类名一般以MinIn结尾，如：RunnableMixIn、FlyableMixIn
     '''
+
     def __init__(self, name, age):
         print('Class3.__init__')
         # 下面是对每一个父类进行分开调用他们的init方法
@@ -90,32 +93,34 @@ class Class3(Class1, Class2):
         # 下面是一起调用Class3的父类方法，其中__init__(args)，里面的参数表示的就是奔雷即Class3的初始化方法的参数（注意：不是父类的）
         # super(Class3, self).__init__(name, age)
 
-c3 = Class3('测试3',18)
+
+# c3 = Class3('测试3',18)
 
 class Base(object):
     def __init__(self):
-        print ("enter Base")
-        print ("leave Base")
+        print("enter Base")
+        print("leave Base")
 
-class A():
+
+class A:
     def __init__(self):
-        print ("enter A")
+        print("enter A")
         super(A, self).__init__()
-        print ("leave A")
+        print("leave A")
+
 
 class B():
     def __init__(self):
-        print ("enter B")
+        print("enter B")
         super(B, self).__init__()
-        print ("leave B")
+        print("leave B")
+
 
 class C(A, B):
     def __init__(self):
-        print( "enter C")
+        print("enter C")
         super(C, self).__init__()
-        print ("leave C")
+        print("leave C")
+
 
 c = C()
-
-
-

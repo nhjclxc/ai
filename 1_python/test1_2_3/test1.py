@@ -1,7 +1,14 @@
 # FIlename: test1.py
-
+import copy
 import decimal
 import sys
+
+x = decimal.Decimal()
+print(x)
+x = 'ascasc'
+print(x)
+x = "qqq"
+print(x)
 
 var = '你是谁？？'
 print(f'param = {var}')
@@ -15,13 +22,15 @@ print(f'param = {var}')
 encodings = sys.getdefaultencoding()
 print(f'encodings = {encodings}')
 
-print('8*6=',8*9)
+print('8*6=', 8 * 9)
+
 
 def abs(a):
     if a > 0:
         return a
     else:
         return -a
+
 
 print(f'abs(a) = {abs(6)}')
 print(f'abs(a) = {abs(-6)}')
@@ -37,7 +46,6 @@ print(123e-5)
 money = decimal.Decimal('123.456')
 print(f'money = {money}')
 
-
 # 转义
 print('''
 line1 ,
@@ -46,16 +54,19 @@ line2...
 
 print(r'\\\t\\')
 
-
 # 布尔值 True，False
 
 
 '''
-空值 Node，py中没有像java中的null，py中使用None来代替
+空值 None，py中没有像java中的null，py中使用None来代替
 None不能理解为0，因为0是有意义的，而None是一个特殊的空值。
 '''
 # print(null)
 print(None)
+
+x = None
+print(f'x == None = ${x == None}')
+print(f'x is None = ${x is None}')
 
 '''
 py中的变量，py中不像Java里面有强制类型，也没有类型声明，任何一个数据类型都可以存储在变量里面
@@ -67,31 +78,44 @@ print(var)
 var = True
 print(var)
 
-
 # 想想下面的输出结果
 a = 'aaa'
 b = a
 a = 'qqq'
-print(f'a = {a}, id(a) = {id(a)}') # a = qqq, id(a) = 2630013064624
-print(f'b = {b}, id(b) = {id(b)}') # b = aaa, id(b) = 2630013064752
+print(f'a = {a}, id(a) = {id(a)}')  # a = qqq, id(a) = 2630013064624
+print(f'b = {b}, id(b) = {id(b)}')  # b = aaa, id(b) = 2630013064752
 
-# 可以得出结论，在py中是赋值，是深拷贝，而不是地址。
+# 可以得出结论，在py中基本数据类型的赋值是深拷贝(即值传递)，而不是拷贝地址值。
 
-list1 = [1,2,3]
+list1 = [1, 2, 3]
 list2 = list1
-print(f'list1 = {list1}, id(list1) = {id(list1)}') # list1 = [1, 2, 3], id(list1) = 2395989340480
-print(f'list2 = {list2}, id(list2) = {id(list2)}') # list2 = [1, 2, 3], id(list2) = 2395989340480
+print(f'list1 = {list1}, id(list1) = {id(list1)}')  # list1 = [1, 2, 3], id(list1) = 2395989340480
+print(f'list2 = {list2}, id(list2) = {id(list2)}')  # list2 = [1, 2, 3], id(list2) = 2395989340480
 
 list1.append(666)
-print(f'list1 = {list1}, id(list1) = {id(list1)}') # list1 = [4, 5, 6, 666], id(list1) = 1879436242112
-print(f'list2 = {list2}, id(list2) = {id(list2)}') # list2 = [1, 2, 3, 666], id(list2) = 2395989340480
+print(f'list1 = {list1}, id(list1) = {id(list1)}')  # list1 = [4, 5, 6, 666], id(list1) = 1879436242112
+print(f'list2 = {list2}, id(list2) = {id(list2)}')  # list2 = [1, 2, 3, 666], id(list2) = 2395989340480
 
-list1 = [4,5,6]
-print(f'list1 = {list1}, id(list1) = {id(list1)}') # list1 = [4, 5, 6], id(list1) = 1879436242112
-print(f'list2 = {list2}, id(list2) = {id(list2)}') # list2 = [1, 2, 3], id(list2) = 2395989340480
+list1 = [4, 5, 6]
+print(f'list1 = {list1}, id(list1) = {id(list1)}')  # list1 = [4, 5, 6], id(list1) = 1879436242112
+print(f'list2 = {list2}, id(list2) = {id(list2)}')  # list2 = [1, 2, 3], id(list2) = 2395989340480
 
 # 根据以上可以得出，对于基本数据类型是值传递，而对象类型是地址传递
+# 以下实现list的深拷贝
+# 方式1:使用切片[:]
+list3 = list1[:]
+print(f'list1 = {list1}, id(list1) = {id(list1)}')  # list1 = [4, 5, 6], id(list1) = 1879436242112
+print(f'list3 = {list3}, id(list2) = {id(list3)}')  # list3 = [1, 2, 3], id(list3) = 4680319360
 
+# 方式2: 使用list列表函数
+list5 = list(list1)
+print(f'list1 = {list1}, id(list1) = {id(list1)}')  # list1 = [4, 5, 6], id(list1) = 1879436242112
+print(f'list5 = {list5}, id(list2) = {id(list5)}')  # list5 = [1, 2, 3], id(list5) = 4677577088
+
+# 方式3：使用copy函数
+list6 = copy.copy(list1)
+print(f'list1 = {list1}, id(list1) = {id(list1)}')  # list1 = [4, 5, 6], id(list1) = 1879436242112
+print(f'list6 = {list6}, id(list6) = {id(list6)}')  # list6 = [1, 2, 3], id(list6) = 4678547968
 
 '''
 常量
@@ -101,21 +125,18 @@ print(f'list2 = {list2}, id(list2) = {id(list2)}') # list2 = [1, 2, 3], id(list2
 PI = 3.1415926
 print(PI)
 
-
 '''py中的除法
     浮点除法： 使用一个除号 /
     整数除法： 使用两个除号 //
 '''
-print(10 / 3)
-print(10 // 3)
+print(10 / 3)  # 3.3333333333333335
+print(10 // 3)  # 3
 
-
-age = 55 #int(input('输入你的年龄：'))
+age = 55  # int(input('输入你的年龄：'))
 if age > 18:
     print('大于18')
 else:
     print('小于等于18')
-
 
 # 字符串
 
@@ -123,7 +144,7 @@ str = 'hello world'
 print(type(str))
 print(id(str))
 
-print(2**16)
+print(2 ** 3)  # 2^3 = 8
 
 print('=================')
 A = 'A'
@@ -133,13 +154,12 @@ print(ord(A))
 # print(ord(num65))
 print(chr(num65))
 
-str = '你' #只能单个字符
+str = '你'  # 只能单个字符
 print(ord(str))
 ordd = ord(str)
 print(chr(ordd))
 
 print(b'ABC'.decode('ascii'))
-
 
 '''格式化输出 格式化
 在Python中，采用的格式化方式和C语言是一致的，用%实现
@@ -165,9 +185,7 @@ r = 36
 PI = 3.141592666666
 print(fr'输出字符串 {r}， {PI:.3f}，{PI}')
 
-
 aa = 'abc'
 bb = aa.replace('b', 'B')
 print(aa)
 print(bb)
-

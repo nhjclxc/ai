@@ -21,16 +21,15 @@ import sys
 
 
 def parse_args():
-
     ''' 解析命令行参数 '''
     # 从python 后面的后世命令参数
     args = sys.argv  # python .\test8_module\__init__.py --help ... --java c -format dot
     print(args)  # ['.\\test8_module\\__init__.py', '--help', '...', '--java', 'c', '-format', 'dot']
-    args2 = sys.argv[1:] # ['--help', '...', '--java', 'c', '-format', 'dot']
+    args2 = sys.argv[1:]  # ['--help', '...', '--java', 'c', '-format', 'dot']
     print(args2)
 
-
     pass
+
 
 # 解析命令行，参数
 
@@ -53,8 +52,8 @@ def parse_comm_args():
 if __name__ == '__main__':
     parse_args()
 
-
 import socket
+
 
 def get_local_ip():
     try:
@@ -68,6 +67,7 @@ def get_local_ip():
         print(f"Error occurred: {e}")
         return None
 
+
 # 调用函数获取本机IP地址
 ip_address = get_local_ip()
 if ip_address:
@@ -75,9 +75,8 @@ if ip_address:
 else:
     print("无法获取本机IP地址")
 
-
-
 import requests
+
 
 def get_public_ip():
     try:
@@ -91,6 +90,7 @@ def get_public_ip():
     except requests.RequestException as e:
         print(f"Error occurred: {e}")
         return None
+
 
 # 获取公网IP地址
 public_ip_address = get_public_ip()

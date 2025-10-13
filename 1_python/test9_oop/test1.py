@@ -54,9 +54,11 @@ if __name__ == '__main__':
     attributes = obj.get_all_attributes()
     for attribute, value in attributes.items():
         print(f"{attribute}: {value}")
+    print()
 
     print(obj.to_string())
     print(obj.to_string2())
+    print()
 
 
     lst = [1, 2, 3, 4, 5, 6, 7]
