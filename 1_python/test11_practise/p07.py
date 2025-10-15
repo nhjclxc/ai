@@ -169,6 +169,49 @@ def test5():
     print(add(1,2))
 
 
+def lazy_sum1(args):
+    def sum():
+        ax = 0
+        for n in args:
+            ax = ax + n
+        return ax
+    return sum
+
+
+def lazy_sum2(args):
+    ax = 0
+    for n in args:
+        ax = ax + n
+    return ax
+
+
+def createCounter():
+    x = 0
+    def counter():
+        nonlocal x
+        x = x + 1
+        return x
+    return counter
+
+
+def test6():
+
+    d = [1,2,3,4,5,6]
+    print(lazy_sum2(d))
+    s = lazy_sum1(d)
+    print(s())
+
+    c = createCounter()
+    print(c())
+    print(c())
+    print(c())
+
+    pass
+
+
+__author__ = 'Michael Liao'
+
+
 if __name__ == '__main__':
     # test1()
 
